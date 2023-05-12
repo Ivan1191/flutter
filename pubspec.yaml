@@ -1,0 +1,48 @@
+name: run
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 0.0.1+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  http: ^0.13.6
+  time_planner: ^0.1.1
+  flutter_tts: ^3.1.1 
+
+  english_words: ^4.0.0
+  provider: ^6.0.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - ./images/user.png
+    - ./images/pic1.jpg
+    - ./images/pic2.jpg
+    - ./images/pic3.jpg
+    - ./images/pic4.jpg
+    - ./images/pic5.jpg
+    - ./images/pic6.jpg
+    - ./images/pic7.jpg
+    - ./images/pic8.jpg
+    - ./images/pic9.jpg
+    - ./images/pic10.jpg
+    - ./images/pic11.jpg
+    - ./images/pic12.jpg
+    
