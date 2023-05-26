@@ -88,7 +88,7 @@ class TravelDestinationItem extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 shape: shape,
                 child: Semantics(
-                  label: destination.title,
+                  //label: destination.title,
                   child: TravelDestinationContent(destination: destination),
                 ),
               ),
@@ -109,7 +109,7 @@ class TappableTravelDestinationItem extends StatefulWidget {
   });
 
   // This height will allow for all the Card's content to fit comfortably within the card.
-  static const height = 270.0;
+  static const height = 224.0;
   final TravelDestination destination;
   final ShapeBorder? shape;
 
@@ -129,7 +129,7 @@ class _TappableTravelDestinationItemState
       top: false,
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
         child: Column(
           children: [
             SizedBox(
@@ -162,7 +162,7 @@ class _TappableTravelDestinationItemState
                   // Generally, material cards do not have a highlight overlay.
                   highlightColor: Colors.transparent,
                   child: Semantics(
-                    label: widget.destination.title,
+                    //label: widget.destination.title,
                     child: TravelDestinationContent(
                         destination: widget.destination),
                   ),
@@ -176,25 +176,25 @@ class _TappableTravelDestinationItemState
   }
 }
 
-class SectionTitle extends StatelessWidget {
-  const SectionTitle({
-    super.key,
-    required this.title,
-  });
+// class SectionTitle extends StatelessWidget {
+//   const SectionTitle({
+//     super.key,
+//     required this.title,
+//   });
 
-  final String title;
+//   final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 4, 4, 12),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(title, style: Theme.of(context).textTheme.titleMedium),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.fromLTRB(4, 4, 4, 12),
+//       child: Align(
+//         alignment: Alignment.centerLeft,
+//         child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+//       ),
+//     );
+//   }
+// }
 
 class TravelDestinationContent extends StatelessWidget {
   const TravelDestinationContent({super.key, required this.destination});
@@ -204,74 +204,63 @@ class TravelDestinationContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final titleStyle = theme.textTheme.headlineSmall!.copyWith(
-      color: Colors.white,
-    );
+    // final titleStyle = theme.textTheme.headlineSmall!.copyWith(
+    //   color: Colors.white,
+    // );
     final descriptionStyle = theme.textTheme.titleMedium!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 184,
+          height: 160,
           child: Stack(
             children: [
               Positioned.fill(
-                // In order to have the ink splash appear above the image, you
-                // must use Ink.image. This allows the image to be painted as
-                // part of the Material and display ink effects above it. Using
-                // a standard Image will obscure the ink splash.
                 child: Ink.image(
                   image: AssetImage(destination.assetName),
                   fit: BoxFit.cover,
                   child: Container(),
                 ),
               ),
-              Positioned(
-                bottom: 16,
-                left: 29,
-                right: 16,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerLeft,
-                  child: Semantics(
-                    container: true,
-                    header: true,
-                    child: Text(
-                      destination.title,
-                      style: titleStyle,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
-        // Description and share/explore buttons.
         Semantics(
           container: true,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
             child: DefaultTextStyle(
               softWrap: false,
               overflow: TextOverflow.ellipsis,
-              style: descriptionStyle,
+              style: TextStyle(
+                fontFamily: 'Arial',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // This array contains the three line description on each card
-                  // demo.
                   Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.volume_up_rounded),
-                      )),
+                    padding: const EdgeInsets.only(bottom: 0),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.volume_up_rounded),
+                      color: Colors.black,
+                    ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 6, bottom: 4),
+                    padding: const EdgeInsets.only(top: 6, bottom: 6),
                     child: Text(
                       destination.description,
-                      style: descriptionStyle.copyWith(color: Colors.black54),
+                      style: TextStyle(
+                        fontFamily: 'Arial',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -280,12 +269,11 @@ class TravelDestinationContent extends StatelessWidget {
           ),
         ),
         if (destination.cardType == CardType.standard)
-          // share, explore buttons
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(6),
             child: OverflowBar(
               alignment: MainAxisAlignment.start,
-              spacing: 8,
+              spacing: 6,
               children: [
                 TextButton(
                   onPressed: () {},
@@ -336,48 +324,66 @@ class _DestRouteState extends State<DestRoute> with RestorationMixin {
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 184, 97),
-        title: Text(''),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: '',
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_drop_down_circle,
-            ),
-            color: Color.fromRGBO(0, 0, 0, 0.749),
-            onPressed: () {},
+      // appBar: AppBar(
+      //   backgroundColor: Color.fromARGB(255, 255, 184, 97),
+      //   title: Text(''),
+      //   leading: Builder(
+      //     builder: (BuildContext context) {
+      //       return IconButton(
+      //         icon: Icon(Icons.menu),
+      //         onPressed: () {
+      //           Scaffold.of(context).openDrawer();
+      //         },
+      //         tooltip: '',
+      //       );
+      //     },
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(
+      //         Icons.arrow_drop_down_circle,
+      //       ),
+      //       color: Color.fromRGBO(0, 0, 0, 0.749),
+      //       onPressed: () {},
+      //     ),
+      //   ],
+      // ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 114,
           ),
+          Text(
+            '好多想法...',
+            style: TextStyle(
+              fontFamily: 'Arial',
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w700,
+              fontSize: 36,
+              height: 1.13,
+              color: Color.fromRGBO(254, 130, 8, 1),
+            ),
+          ),
+          GridView.count(
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+              crossAxisCount: 2,
+              childAspectRatio: (itemWidth / itemHeight),
+              mainAxisSpacing: 0,
+              controller: ScrollController(keepScrollOffset: false),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: [
+                for (final destination in destinations(context))
+                  SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: (destination.cardType == CardType.standard)
+                          ? TravelDestinationItem(destination: destination)
+                          : TappableTravelDestinationItem(
+                              destination: destination)),
+              ]),
         ],
       ),
-      body: GridView.count(
-          padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-          crossAxisCount: 2,
-          childAspectRatio: (itemWidth / itemHeight),
-          mainAxisSpacing: 0,
-          controller: ScrollController(keepScrollOffset: false),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: [
-            for (final destination in destinations(context))
-              SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: (destination.cardType == CardType.standard)
-                      ? TravelDestinationItem(destination: destination)
-                      : TappableTravelDestinationItem(
-                          destination: destination)),
-          ]),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -403,49 +409,49 @@ class _DestRouteState extends State<DestRoute> with RestorationMixin {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fmd_good),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fast_rewind),
-            label: 'Back',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.group),
-          //   label: 'Group',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.videocam),
-          //   label: 'Meet',
-          // ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.749),
-        onTap: (int index) {
-          switch (index) {
-            case 0:
-              break;
-            case 1:
-              Navigator.pop(context);
-              break;
-          }
-          setState(
-            () {
-              selectedIndex = index;
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (() => {}),
-        shape: CircleBorder(),
-        isExtended: false,
-        child: const Icon(Icons.replay_circle_filled),
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.fmd_good),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.fast_rewind),
+      //       label: 'Back',
+      //     ),
+      //     // BottomNavigationBarItem(
+      //     //   icon: Icon(Icons.group),
+      //     //   label: 'Group',
+      //     // ),
+      //     // BottomNavigationBarItem(
+      //     //   icon: Icon(Icons.videocam),
+      //     //   label: 'Meet',
+      //     // ),
+      //   ],
+      //   currentIndex: selectedIndex,
+      //   selectedItemColor: Colors.amber[800],
+      //   unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.749),
+      //   onTap: (int index) {
+      //     switch (index) {
+      //       case 0:
+      //         break;
+      //       case 1:
+      //         Navigator.pop(context);
+      //         break;
+      //     }
+      //     setState(
+      //       () {
+      //         selectedIndex = index;
+      //       },
+      //     );
+      //   },
+      // ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (() => {}),
+      //   shape: CircleBorder(),
+      //   isExtended: false,
+      //   child: const Icon(Icons.replay_circle_filled),
+      // ),
     );
   }
 }
