@@ -1,11 +1,17 @@
 // ignore_for_file: sort_child_properties_last, unnecessary_new, must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // 引入flutter_tts庫
 import 'package:intl/intl.dart'; // 引入日期格式化套件
 import 'voice.dart';
+import 'theme.dart';
 import 'register.dart';
 
 String address = '';
+// control unit
+int theme = 1;
+int ideacnt = 1;
+// There are two options in list
+List<String> destList = <String>[];
+List<String> foodList = <String>[];
 
 void main() {
   runApp(MyApp());
@@ -22,9 +28,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         // primaryColor: Color.fromARGB(255, 255, 184, 97),
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 184, 97)),
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 248, 225)),
       ),
-      home: MyHomePage(),
+      home: ThemeRoute(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -1307,10 +1313,12 @@ class _SixthPageState extends State<SixthPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => VoiceRoute()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) =>
+                        //           VoiceRoute(furtherList: widget.furtherList)),
+                        // );
                       },
                       child: Text(
                         '確認',

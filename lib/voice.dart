@@ -1,175 +1,138 @@
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+import 'package:flutter/gestures.dart';
+import 'package:fianl/dest.dart';
+import 'package:fianl/food.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dest.dart';
+import 'package:fianl/main.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class VoiceRoute extends StatefulWidget {
+  List<FurtherKeyword> Function(BuildContext) furtherList;
+  VoiceRoute({
+    super.key,
+    required this.furtherList,
+  });
+
   @override
-  State<VoiceRoute> createState() => _VoiceRouteState();
+  _VoiceState createState() => _VoiceState();
 }
 
-class _VoiceRouteState extends State<VoiceRoute> {
-  int _selectedIndex = 0;
+class _VoiceState extends State<VoiceRoute> {
+  final LongPressGestureRecognizer _longPressRecognizer =
+      LongPressGestureRecognizer();
+  late stt.SpeechToText _speechToText; // 語音辨識實例
+  String _spokenText = ''; // 儲存辨識結果的文字
+  bool _isButtonPressed = false; // 按鈕狀態
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeSpeechToText(); // 初始化語音辨識
+  }
+
+  void _initializeSpeechToText() {
+    _speechToText = stt.SpeechToText(); // 建立語音辨識實例
+    _speechToText.initialize(
+      onError: (error) => print('Speech recognition error: $error'), // 設定錯誤回調函數
+      onStatus: (status) =>
+          print('Speech recognition status: $status'), // 設定狀態回調函數
+    );
+  }
+
+  @override
+  void dispose() {
+    _longPressRecognizer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 184, 97),
-        title: Text(''),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '說出你的想法!',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w700,
+                fontSize: 36,
+                height: 1.13,
+                color: Color.fromRGBO(254, 130, 8, 1),
+              ),
+            ),
+            SizedBox(height: 40),
+            Image(image: AssetImage('images/3.3.png')),
+            SizedBox(height: 40),
+            GestureDetector(
+              onLongPress: () {
+                // callback();
+                setState(() {
+                  _isButtonPressed = true; // 更新按鈕狀態為按下
+                });
+                _startSpeechToText(); // 開始語音辨識
               },
-              tooltip: '',
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_drop_down_circle,
-            ),
-            color: Color.fromRGBO(0, 0, 0, 0.749),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    FlutterTts().speak('你想要去哪裡？');
-                  },
-                  child: InkResponse(
-                    splashColor: Colors.grey,
-                    highlightColor: Colors.transparent,
-                    child: Icon(Icons.mic),
-                    onTap: () {
-                      FlutterTts().speak('你想要去哪裡？');
-                    },
+              onLongPressUp: () {
+                // 放開長按後執行
+                setState(() {
+                  _isButtonPressed = false; // 更新按鈕狀態為放開
+                });
+                _stopSpeechToText();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => (theme == 1)
+                          ? DestRoute(furtherList: widget.furtherList)
+                          : FoodRoute()), // 替換為要跳轉的下個頁面
+                );
+              },
+              child: SizedBox(
+                height: 80.0,
+                width: 80.0,
+                child: FloatingActionButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
                   ),
+                  backgroundColor: Color.fromRGBO(254, 130, 8, 1),
+                  child: Icon(
+                    Icons.mic,
+                    size: 36,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
                 ),
-                SizedBox(width: 10),
-                Text(
-                  '你想要去哪裡？',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: 100,
-                    icon: Icon(Icons.mic),
-                    onPressed: () {
-                      // TODO: 啟動語音辨識
-                    },
-                  ),
-                  SizedBox(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: Text(
-                          '輸入完成',
-                          style: TextStyle(color: Colors.amber[800]),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              callback();
-                              return DestRoute();
-                            }),
-                          ).then((value) {
-                            // navigator.pop's response
-                            if (value != null) {
-                              setState(() {
-                                // TappableTravelDestinationItem
-                                //     .MailArray[1].isFavorite = value;
-                              });
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(
-                '',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              accountEmail: Text(
-                'MY NAME',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 184, 97),
-              ),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.amber[800],
-                backgroundImage: AssetImage('images/user.png'),
+            SizedBox(height: 20),
+            Text(
+              '說話結果: $_spokenText', // 顯示語音辨識結果的文字
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fmd_good),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fast_rewind),
-            label: 'Back',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.749),
-        onTap: (int index) {
-          switch (index) {
-            case 0:
-              break;
-            case 1:
-              Navigator.pop(context);
-              break;
-          }
-          setState(
-            () {
-              _selectedIndex = index;
-            },
-          );
-        },
-      ),
     );
+  }
+
+  void _startSpeechToText() {
+    _speechToText.listen(
+      onResult: (result) {
+        setState(() {
+          _spokenText = result.recognizedWords; // 更新語音辨識結果的文字
+        });
+      },
+    );
+  }
+
+  void _stopSpeechToText() {
+    _speechToText.stop(); // 停止語音辨識
   }
 
   void callback() async {
@@ -193,199 +156,3 @@ class _VoiceRouteState extends State<VoiceRoute> {
     }
   }
 }
-=======
-import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'dest.dart';
-
-class VoiceRoute extends StatefulWidget {
-  @override
-  State<VoiceRoute> createState() => _VoiceRouteState();
-}
-
-class _VoiceRouteState extends State<VoiceRoute> {
-  int _selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 184, 97),
-        title: Text(''),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: '',
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_drop_down_circle,
-            ),
-            color: Color.fromRGBO(0, 0, 0, 0.749),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    FlutterTts().speak('你想要去哪裡？');
-                  },
-                  child: InkResponse(
-                    splashColor: Colors.grey,
-                    highlightColor: Colors.transparent,
-                    child: Icon(Icons.mic),
-                    onTap: () {
-                      FlutterTts().speak('你想要去哪裡？');
-                    },
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  '你想要去哪裡？',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: 100,
-                    icon: Icon(Icons.mic),
-                    onPressed: () {
-                      // TODO: 啟動語音辨識
-                    },
-                  ),
-                  SizedBox(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: Text(
-                          '輸入完成',
-                          style: TextStyle(color: Colors.amber[800]),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              callback();
-                              return DestRoute();
-                            }),
-                          ).then((value) {
-                            // navigator.pop's response
-                            if (value != null) {
-                              setState(() {
-                                // TappableTravelDestinationItem
-                                //     .MailArray[1].isFavorite = value;
-                              });
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(
-                '',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              accountEmail: Text(
-                'MY NAME',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 184, 97),
-              ),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.amber[800],
-                backgroundImage: AssetImage('images/user.png'),
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fmd_good),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fast_rewind),
-            label: 'Back',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.749),
-        onTap: (int index) {
-          switch (index) {
-            case 0:
-              break;
-            case 1:
-              Navigator.pop(context);
-              break;
-          }
-          setState(
-            () {
-              _selectedIndex = index;
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  void callback() async {
-    var msg = {
-      'location': '嘉義市',
-      'keyword': '百科',
-      'locationPx': '-1',
-      'locationPy': '-1'
-    };
-    try {
-      final response = await http.post(
-        Uri.parse('http://140.116.245.152:22545/HaishingRec'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(msg),
-      );
-      print(jsonDecode(response.body));
-    } catch (e) {
-      print('Error occurred: $e');
-    }
-  }
-}
->>>>>>> 709f29ac6a37e96b62ce765a6599ef304fdd45ab
