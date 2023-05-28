@@ -124,7 +124,11 @@ Future<void> speakText(String text) async {
 void showConfirmationDialog(BuildContext context, dynamic dest) {
   Widget page;
   (ideacnt < 2)
-      ? page = GotoRoute(furtherList: dest.furtherList)
+      ? page = GotoRoute(
+          furtherList: dest.furtherList,
+          type: "玩樂",
+          level: '1',
+        )
       : page = ChooseRoute();
 
   showDialog(

@@ -6,13 +6,19 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fianl/main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:tuple/tuple.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class VoiceRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
-  VoiceRoute({
-    super.key,
-    required this.furtherList,
-  });
+  String type;
+  String level = "0";
+  VoiceRoute(
+      {super.key,
+      required this.furtherList,
+      required this.type,
+      required this.level});
 
   @override
   _VoiceState createState() => _VoiceState();
@@ -126,12 +132,16 @@ class _VoiceState extends State<VoiceRoute> {
                 });
                 _startSpeechToText(); // 開始語音辨識
               },
-              onLongPressUp: () {
+              onLongPressUp: () async {
                 // 放開長按後執行
                 setState(() {
                   _isButtonPressed = false; // 更新按鈕狀態為放開
                 });
                 _stopSpeechToText();
+                /* 選擇要去哪裡 */
+                var result = await postKeyWord("台北", _spokenText, "-1", "-1",
+                    widget.type, '1'); // 這邊 level 要改
+                print(result); /* 這邊 */
                 showConfirmationDialog(context);
               },
               child: SizedBox(
