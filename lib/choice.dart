@@ -1,22 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:animations/animations.dart';
-
-const String _loremIpsumParagraph =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod '
-    'tempor incididunt ut labore et dolore magna aliqua. Vulputate dignissim '
-    'suspendisse in est. Ut ornare lectus sit amet. Eget nunc lobortis mattis '
-    'aliquam faucibus purus in. Hendrerit gravida rutrum quisque non tellus '
-    'orci ac auctor. Mattis aliquam faucibus purus in massa. Tellus rutrum '
-    'tellus pellentesque eu tincidunt tortor. Nunc eget lorem dolor sed. Nulla '
-    'at volutpat diam ut venenatis tellus in metus. Tellus cras adipiscing enim '
-    'eu turpis. Pretium fusce id velit ut tortor. Adipiscing enim eu turpis '
-    'egestas pretium. Quis varius quam quisque id. Blandit aliquam etiam erat '
-    'velit scelerisque. In nisl nisi scelerisque eu. Semper risus in hendrerit '
-    'gravida rutrum quisque. Suspendisse in est ante in nibh mauris cursus '
-    'mattis molestie. Adipiscing elit duis tristique sollicitudin nibh sit '
-    'amet commodo nulla. Pretium viverra suspendisse potenti nullam ac tortor '
-    'vitae.\n';
+import 'main.dart';
+import 'journey.dart';
 
 class TravelDestination {
   const TravelDestination({
@@ -32,6 +18,23 @@ class TravelDestination {
   final String description;
   final String city;
   final String location;
+}
+
+List<TravelDestination> result = [];
+
+Future<List<TravelDestination>> placeList() async {
+  var dest = destList.join(' ');
+  var tmplist = await postKeyWord("台北", dest, "-1", '-1', '玩樂', '3');
+  for (int i = 0; i < tmplist[0].length; i++) {
+    String name = await callpicture(tmplist[0][i]["Name"]) as String;
+    result.add(TravelDestination(
+        assetName: name,
+        title: tmplist[i]["Name"],
+        description: tmplist[i]["Toldscribe"],
+        city: "city",
+        location: "location"));
+  }
+  return result;
 }
 
 List<TravelDestination> destinations(BuildContext context) {
@@ -238,7 +241,12 @@ class _DetailsPage extends StatelessWidget {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              print('搜尋結果: $result');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => JourneyRoute()),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Color.fromARGB(255, 254, 130, 8),
@@ -261,10 +269,6 @@ class _DetailsPage extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => AdultStart()),
-                              // );
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Color.fromARGB(255, 255, 248, 225),
@@ -317,9 +321,6 @@ class TappableTravelDestinationItem extends StatefulWidget {
 
 class _TappableTravelDestinationItemState
     extends State<TappableTravelDestinationItem> {
-  // record selected item
-  final destList = <String>[];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -391,6 +392,7 @@ class ChooseRoute extends StatefulWidget {
 
 class _ChooseState extends State<ChooseRoute> with RestorationMixin {
   int selectedIndex = 0;
+
   final RestorableBool _isSelected = RestorableBool(false);
 
   @override

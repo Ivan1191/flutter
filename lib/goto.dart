@@ -92,7 +92,8 @@ class _GotoState extends State<GotoRoute> {
                   MaterialPageRoute(
                       builder: (context) => (theme == 1)
                           ? DestRoute(furtherList: widget.furtherList)
-                          : FoodRoute()), // 替換為要跳轉的頁面
+                          : FoodRoute(
+                              furtherList: widget.furtherList)), // 替換為要跳轉的頁面
                 );
               },
               child: Center(

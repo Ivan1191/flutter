@@ -50,7 +50,7 @@ class _VoiceState extends State<VoiceRoute> {
     Widget page;
     (theme == 1)
         ? page = DestRoute(furtherList: widget.furtherList)
-        : page = FoodRoute();
+        : page = FoodRoute(furtherList: widget.furtherList);
 
     showDialog(
       context: context,
