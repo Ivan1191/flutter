@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:fianl/dest.dart';
@@ -6,13 +8,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fianl/main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:path_provider/path_provider.dart';
 
 class VoiceRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
-  VoiceRoute({
-    super.key,
-    required this.furtherList,
-  });
+  String type;
+  String level = "0";
+  VoiceRoute(
+      {super.key,
+      required this.furtherList,
+      required this.type,
+      required this.level});
 
   @override
   _VoiceState createState() => _VoiceState();
@@ -82,6 +88,8 @@ class _VoiceState extends State<VoiceRoute> {
                   _isButtonPressed = false; // 更新按鈕狀態為放開
                 });
                 _stopSpeechToText();
+                /* 選擇要去哪裡 */
+                postKeyWord("台北", _spokenText, "-1", "-1", widget.type, '3');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -135,12 +143,37 @@ class _VoiceState extends State<VoiceRoute> {
     _speechToText.stop(); // 停止語音辨識
   }
 
-  void callback() async {
+  Future callpicture(String name) async {
+    // default output[no]["Name"]
+    // return the name of that image
+    var msg = {'Name': name};
+    try {
+      final response = await http.post(
+        Uri.parse('http://140.116.245.152:22545/image'),
+      );
+      if (response.statusCode == 200) {
+        final imageBytes = response.bodyBytes;
+        final directory = await getTemporaryDirectory();
+        final imagePath = '${directory.path}/$name.jpg';
+        File(imagePath).writeAsBytesSync(imageBytes);
+        return imagePath;
+      } else {
+        return "image/false.jpg";
+      }
+    } catch (e) {
+      print('Error occured: $e');
+    }
+  }
+
+  dynamic postKeyWord(String location, String keyword, String locationPx,
+      String locationPy, String type, String level) async {
     var msg = {
-      'location': '嘉義市',
-      'keyword': '百科',
-      'locationPx': '-1',
-      'locationPy': '-1'
+      'location': location,
+      'keyword': keyword,
+      'locationPx': locationPx,
+      'locationPy': locationPy,
+      'type': type,
+      'level': level,
     };
     try {
       final response = await http.post(
@@ -150,7 +183,22 @@ class _VoiceState extends State<VoiceRoute> {
         },
         body: jsonEncode(msg),
       );
-      print(jsonDecode(response.body));
+      var respText = utf8.decode((response.bodyBytes));
+      var level = jsonDecode(respText)["nextlevel"]; // int
+      var outputList =
+          jsonDecode(jsonDecode(respText)["message"]); //List<dynamic>
+
+      // print(outputList[0]["Name"]);
+      // 以下 for 未來 不同type 調整用
+      if (level == 1) {
+        return outputList;
+      }
+      if (level == 2) {
+        return outputList;
+      }
+      if (level == 3) {
+        return outputList;
+      }
     } catch (e) {
       print('Error occurred: $e');
     }

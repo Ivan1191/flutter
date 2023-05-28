@@ -17,6 +17,18 @@ void main() {
   runApp(MyApp());
 }
 
+class Debugpage extends StatelessWidget {
+  const Debugpage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return VoiceRoute(
+      furtherList: initList,
+      type: "玩樂",
+      level: '0',
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
