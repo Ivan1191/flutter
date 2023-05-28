@@ -91,8 +91,8 @@ class _VoiceState extends State<VoiceRoute> {
                 _stopSpeechToText();
                 /* 選擇要去哪裡 */
                 var result = await postKeyWord("台北", _spokenText, "-1", "-1",
-                    widget.type, '0'); // 這邊 level 要改
-                print(result);
+                    widget.type, '1'); // 這邊 level 要改
+                print(result); /* 這邊 */
                 // ignore: use_build_context_synchronously
                 Navigator.push(
                   context,
@@ -177,6 +177,7 @@ class _VoiceState extends State<VoiceRoute> {
       String locationPy, String type, String level) async {
     /* 所有有關於頁面的call 此function 即可 
         *  回傳永遠都會是 Tuple2<dynamic,int>
+        *  type = 吃飯 ／ 玩樂
         */
 
     var msg = {
