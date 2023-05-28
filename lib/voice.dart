@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:fianl/main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:path_provider/path_provider.dart';
+import 'package:tuple/tuple.dart';
 
 class VoiceRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
@@ -82,14 +83,17 @@ class _VoiceState extends State<VoiceRoute> {
                 });
                 _startSpeechToText(); // 開始語音辨識
               },
-              onLongPressUp: () {
+              onLongPressUp: () async {
                 // 放開長按後執行
                 setState(() {
                   _isButtonPressed = false; // 更新按鈕狀態為放開
                 });
                 _stopSpeechToText();
                 /* 選擇要去哪裡 */
-                postKeyWord("台北", _spokenText, "-1", "-1", widget.type, '3');
+                var result = await postKeyWord("台北", _spokenText, "-1", "-1",
+                    widget.type, '0'); // 這邊 level 要改
+                print(result);
+                // ignore: use_build_context_synchronously
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -150,6 +154,10 @@ class _VoiceState extends State<VoiceRoute> {
     try {
       final response = await http.post(
         Uri.parse('http://140.116.245.152:22545/image'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(msg),
       );
       if (response.statusCode == 200) {
         final imageBytes = response.bodyBytes;
@@ -167,6 +175,10 @@ class _VoiceState extends State<VoiceRoute> {
 
   dynamic postKeyWord(String location, String keyword, String locationPx,
       String locationPy, String type, String level) async {
+    /* 所有有關於頁面的call 此function 即可 
+        *  回傳永遠都會是 Tuple2<dynamic,int>
+        */
+
     var msg = {
       'location': location,
       'keyword': keyword,
@@ -185,19 +197,24 @@ class _VoiceState extends State<VoiceRoute> {
       );
       var respText = utf8.decode((response.bodyBytes));
       var level = jsonDecode(respText)["nextlevel"]; // int
-      var outputList =
-          jsonDecode(jsonDecode(respText)["message"]); //List<dynamic>
 
       // print(outputList[0]["Name"]);
       // 以下 for 未來 不同type 調整用
       if (level == 1) {
-        return outputList;
+        var output = jsonDecode(respText)["message"];
+        print(output);
+        print(level);
+        return Tuple2(output, level);
       }
       if (level == 2) {
-        return outputList;
+        var output = jsonDecode(respText)["message"];
+
+        return Tuple2(output, level);
       }
       if (level == 3) {
-        return outputList;
+        var outputList =
+            jsonDecode(jsonDecode(respText)["message"]); //List<dynamic>
+        return Tuple2(outputList, level);
       }
     } catch (e) {
       print('Error occurred: $e');
