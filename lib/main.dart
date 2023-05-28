@@ -1,8 +1,7 @@
 // ignore_for_file: sort_child_properties_last, unnecessary_new, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // 引入日期格式化套件
-import 'voice.dart';
-import 'theme.dart';
+import 'start.dart';
 import 'register.dart';
 
 String address = '';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 248, 225)),
       ),
-      home: ThemeRoute(),
+      home: StartRoute(),
       debugShowCheckedModeBanner: false,
     );
   }

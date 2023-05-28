@@ -40,6 +40,56 @@ class _VoiceState extends State<VoiceRoute> {
     );
   }
 
+  void showConfirmationDialog(BuildContext context) {
+    Widget page;
+    (theme == 1)
+        ? page = DestRoute(furtherList: widget.furtherList)
+        : page = FoodRoute();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('語音是否無誤？'),
+          content: Text(_spokenText),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return page;
+                  }),
+                );
+              },
+              child: Text(
+                '確定',
+                style: TextStyle(
+                  fontFamily: 'Arial',
+                  fontStyle: FontStyle.normal,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // 取消，返回原本的頁面
+              },
+              child: Text(
+                '取消',
+                style: TextStyle(
+                  fontFamily: 'Arial',
+                  fontStyle: FontStyle.normal,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     _longPressRecognizer.dispose();
@@ -82,13 +132,7 @@ class _VoiceState extends State<VoiceRoute> {
                   _isButtonPressed = false; // 更新按鈕狀態為放開
                 });
                 _stopSpeechToText();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => (theme == 1)
-                          ? DestRoute(furtherList: widget.furtherList)
-                          : FoodRoute()), // 替換為要跳轉的下個頁面
-                );
+                showConfirmationDialog(context);
               },
               child: SizedBox(
                 height: 80.0,
