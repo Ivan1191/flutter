@@ -59,34 +59,33 @@ class _VoiceState extends State<VoiceRoute> {
           title: Text('語音是否無誤？'),
           content: Text(_spokenText),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return page;
-                  }),
-                );
-              },
-              child: Text(
-                '確定',
-                style: TextStyle(
-                  fontFamily: 'Arial',
-                  fontStyle: FontStyle.normal,
-                  color: Colors.black,
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(255, 255, 248, 225),
                 ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // 取消，返回原本的頁面
-              },
-              child: Text(
-                '取消',
-                style: TextStyle(
-                  fontFamily: 'Arial',
-                  fontStyle: FontStyle.normal,
-                  color: Colors.black,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return page;
+                      }),
+                    );
+                  },
+                  icon: Icon(Icons.check,
+                      color: Color.fromARGB(255, 254, 130, 8)),
+                  iconSize: 30.0,
+                  splashRadius: 20.0,
+                  padding: EdgeInsets.all(10.0),
+                  constraints: BoxConstraints(
+                    minWidth: 0,
+                    minHeight: 0,
+                  ),
                 ),
               ),
             ),

@@ -392,7 +392,7 @@ class ChooseRoute extends StatefulWidget {
 
 class _ChooseState extends State<ChooseRoute> with RestorationMixin {
   int selectedIndex = 0;
-
+  List<TravelDestination> resultList = [];
   final RestorableBool _isSelected = RestorableBool(false);
 
   @override
@@ -401,6 +401,18 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_isSelected, 'is_selected');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initResultList();
+  }
+
+  void initResultList() {
+    setState(() async {
+      resultList = await placeList();
+    });
   }
 
   @override
