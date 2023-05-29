@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'theme.dart';
+import 'planend.dart';
 
 class JourneyRoute extends StatefulWidget {
   @override
@@ -16,7 +19,12 @@ class _JourneyState extends State<JourneyRoute> {
         actions: [
           IconButton(
             onPressed: () {
-              // 處理完成按鈕的點擊事件
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return PlanEnd();
+                }),
+              );
             },
             icon: Container(
               decoration: BoxDecoration(
@@ -109,23 +117,41 @@ class _JourneyState extends State<JourneyRoute> {
                 ),
                 SizedBox(height: 16),
                 Center(
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(
-                        color: Color.fromRGBO(254, 130, 8, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.add,
-                        size: 48,
-                        color: Color.fromRGBO(254, 130, 8, 1),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          // control unit
+                          theme = 1;
+                          ideacnt = 1;
+                          // There are two options in list
+                          destList = <String>[];
+                          foodList = <String>[];
+                          return ThemeRoute();
+                        }),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Color.fromRGBO(254, 130, 8, 1),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.add,
+                            size: 48,
+                            color: Color.fromRGBO(254, 130, 8, 1),
+                          ),
+                        ),
                       ),
                     ),
                   ),

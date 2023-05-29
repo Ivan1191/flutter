@@ -78,7 +78,7 @@ class _StartPlanState extends State<StartPlan> {
               fontWeight: FontWeight.w400,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 40),
           Padding(
             padding: EdgeInsets.only(left: 14, right: 14),
             child: TextField(
@@ -173,7 +173,7 @@ class _StartPlanState extends State<StartPlan> {
               ),
             ),
           ),
-          SizedBox(height: 220),
+          SizedBox(height: 200),
           Padding(
             padding: EdgeInsets.only(right: 0),
             child: Align(

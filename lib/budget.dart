@@ -152,7 +152,7 @@ class _BudgetPageState extends State<BudgetPage> {
                 ],
               ),
             ),
-            SizedBox(height: 285),
+            SizedBox(height: 280),
             Padding(
               padding: EdgeInsets.only(right: 0),
               child: Align(

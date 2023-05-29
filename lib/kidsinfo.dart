@@ -17,9 +17,15 @@ class _KidsInfoState extends State<KidsInfo> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Color.fromRGBO(255, 245, 225, 1),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           content: SizedBox(
+            height: 150,
             child: Column(
               children: [
+                SizedBox(
+                  height: 10,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 14, right: 14),
                   child: TextField(
@@ -28,6 +34,7 @@ class _KidsInfoState extends State<KidsInfo> {
                       labelText: '請輸入小孩暱稱',
                       filled: true,
                       fillColor: Color.fromARGB(255, 255, 248, 225),
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
@@ -40,6 +47,7 @@ class _KidsInfoState extends State<KidsInfo> {
                       labelText: '請輸入小孩年齡',
                       filled: true,
                       fillColor: Color.fromARGB(255, 255, 248, 225),
+                      border: InputBorder.none,
                     ),
                   ),
                 ),

@@ -20,32 +20,32 @@ class FoodKeyword {
 List<FoodKeyword> ideaList(BuildContext context) {
   return [
     FoodKeyword(
-      assetName: 'images/pic5.jpg',
+      assetName: 'images/f1.jpg',
       title: '肉',
       furtherList: meatList,
     ),
     FoodKeyword(
-      assetName: 'images/pic6.jpg',
+      assetName: 'images/f2.jpg',
       title: '麵',
       furtherList: noodlesList,
     ),
     FoodKeyword(
-      assetName: 'images/pic7.jpg',
+      assetName: 'images/f3.jpg',
       title: '蔬菜',
       furtherList: vegtList,
     ),
     FoodKeyword(
-      assetName: 'images/pic8.jpg',
+      assetName: 'images/f4.jpg',
       title: '水果',
       furtherList: fruitList,
     ),
     FoodKeyword(
-      assetName: 'images/pic8.jpg',
+      assetName: 'images/f5.jpg',
       title: '甜點',
       furtherList: dessertList,
     ),
     FoodKeyword(
-      assetName: 'images/pic8.jpg',
+      assetName: 'images/f6.jpg',
       title: '海鮮',
       furtherList: seafoodList,
     ),
@@ -250,39 +250,38 @@ void showConfirmationDialog(BuildContext context, dynamic food) {
       return AlertDialog(
         title: Text('你的選擇正確無誤？'),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  print(food.title.toString());
-
-                  ideacnt++;
-                  destList.add(food.title.toString());
-                  print(destList);
-                  return page;
-                }),
-              );
-            },
-            child: Text(
-              '確定',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                color: Colors.black,
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 255, 248, 225),
               ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // 取消，返回原本的頁面
-            },
-            child: Text(
-              '取消',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                color: Colors.black,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      print(food.title.toString());
+
+                      ideacnt++;
+                      foodList.add(food.title.toString());
+                      print(foodList);
+                      return page;
+                    }),
+                  );
+                },
+                icon:
+                    Icon(Icons.check, color: Color.fromARGB(255, 254, 130, 8)),
+                iconSize: 30.0,
+                splashRadius: 20.0,
+                padding: EdgeInsets.all(10.0),
+                constraints: BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                ),
               ),
             ),
           ),
@@ -300,8 +299,8 @@ class TappableTravelFoodItem extends StatefulWidget {
   });
 
   // This height will allow for all the Card's content to fit comfortably within the card.
-  static const height = 180.0;
-  final FoodKeyword food;
+  static const height = 165.0;
+  final dynamic food;
   final ShapeBorder? shape;
 
   @override
@@ -318,7 +317,7 @@ class _TappableTravelFoodItemState extends State<TappableTravelFoodItem> {
       top: false,
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: Column(
           children: [
             SizedBox(

@@ -54,7 +54,7 @@ flutter:
     - ./images/2.2.png
     - ./images/3.3.png
     - ./images/4.1.png
-    - ./images/p1.jpg
+    - ./images/p1.png
     - ./images/p2.jpg
     - ./images/p3.jpg
     - ./images/p4.jpg
@@ -65,3 +65,42 @@ flutter:
     - ./images/p9.jpg
     - ./images/logo2.png
     - ./images/kidinfo.png
+    - ./images/p10.jpg
+    - ./images/p11.jpg
+    - ./images/p12.jpg
+    - ./images/p13.jpg
+    - ./images/p14.jpg
+    - ./images/p15.jpg
+    - ./images/p16.jpg
+    - ./images/p17.jpg
+    - ./images/p18.jpg
+    - ./images/p19.jpg
+    - ./images/p20.jpg
+    - ./images/p21.jpg
+    - ./images/p22.jpg
+    - ./images/p23.jpg
+    - ./images/p24.jpg
+    - ./images/p25.jpg
+    - ./images/p26.jpg
+    - ./images/p27.jpg
+    - ./images/p28.jpg
+    - ./images/p29.jpg
+    - ./images/p30.jpg
+    - ./images/p31.jpg
+    - ./images/p32.jpg
+    - ./images/p33.jpg
+    - ./images/p34.jpg
+    - ./images/p35.jpg
+    - ./images/p36.jpg
+    - ./images/p37.jpg
+    - ./images/p38.jpg
+    - ./images/p39.jpg
+    - ./images/p40.jpg
+    - ./images/p41.jpg
+    - ./images/p42.jpg
+    - ./images/f1.jpg
+    - ./images/f2.jpg
+    - ./images/f3.jpg
+    - ./images/f4.jpg
+    - ./images/f5.jpg
+    - ./images/f6.jpg

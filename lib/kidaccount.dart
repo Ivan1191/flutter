@@ -41,8 +41,7 @@ class _KidAccountState extends State<KidAccount> {
               width: 50.0,
               height: 50.0,
               decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(10.0),
+                shape: BoxShape.circle,
                 color: Color.fromARGB(255, 255, 248, 225),
               ),
               child: IconButton(
@@ -65,7 +64,7 @@ class _KidAccountState extends State<KidAccount> {
                 ),
               ),
             ),
-            SizedBox(height: 250),
+            SizedBox(height: 245),
             Padding(
               padding: EdgeInsets.only(right: 0),
               child: Align(
