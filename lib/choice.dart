@@ -183,36 +183,36 @@ class _DetailsPage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 255, 248, 225),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 170,
+              height: 100,
+            ),
+            Text(
+              '更詳細的行程!',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w700,
+                fontSize: 36,
+                height: 1.13,
+                color: Color.fromRGBO(254, 130, 8, 1),
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             SizedBox(
               height: 500,
               width: 350,
               child: Card(
-                color: Color.fromARGB(255, 255, 248, 225),
+                color: Colors.white,
+                elevation: 2.0,
                 child: ListView(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 20, left: 20, right: 20, bottom: 10),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontFamily: 'Arial',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 36,
-                          height: 1.13,
-                          color: Color.fromRGBO(254, 130, 8, 1),
-                        ),
-                      ),
-                    ),
                     Image.asset(path),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -220,6 +220,14 @@ class _DetailsPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            title,
+                            style: textTheme.bodyMedium!.copyWith(
+                              color: Colors.black,
+                              height: 1.5,
+                              fontSize: 20,
+                            ),
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -234,60 +242,66 @@ class _DetailsPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 40,
+                    ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 20, left: 20, right: 20),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              print('搜尋結果: $result');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => JourneyRoute()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 254, 130, 8),
-                              minimumSize: Size(120, 50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100),
+                          const EdgeInsets.only(top: 10, left: 20, right: 20),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                print('搜尋結果: $result');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => JourneyRoute()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 254, 130, 8),
+                                minimumSize: Size(120, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                elevation: 4,
                               ),
-                              elevation: 4,
-                            ),
-                            child: Text(
-                              '我想去',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 255, 248, 225),
-                              minimumSize: Size(120, 50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100),
-                                side: BorderSide(
-                                    color: Color.fromARGB(255, 254, 130, 8),
-                                    width: 1),
+                              child: Text(
+                                '我想去',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
                               ),
                             ),
-                            child: Text(
-                              '不想去',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromARGB(255, 254, 130, 8)),
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                        ],
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 255, 248, 225),
+                                minimumSize: Size(120, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                  side: BorderSide(
+                                      color: Color.fromARGB(255, 254, 130, 8),
+                                      width: 1),
+                                ),
+                              ),
+                              child: Text(
+                                '不想去',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 254, 130, 8)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -403,17 +417,17 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
     registerForRestoration(_isSelected, 'is_selected');
   }
 
-  @override
-  void initState() {
-    super.initState();
-    initResultList();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   initResultList();
+  // }
 
-  void initResultList() {
-    setState(() async {
-      resultList = await placeList();
-    });
-  }
+  // void initResultList() {
+  //   setState(() async {
+  //     resultList = await placeList();
+  //   });
+  // }
 
   @override
   void dispose() {

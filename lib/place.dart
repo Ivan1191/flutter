@@ -28,7 +28,7 @@ class _PlacePageState extends State<PlacePage> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 45),
             Wrap(
               alignment: WrapAlignment.center,
               spacing: 16,
@@ -90,7 +90,7 @@ class _PlacePageState extends State<PlacePage> {
                 ),
               ],
             ),
-            SizedBox(height: 195),
+            SizedBox(height: 200),
             Padding(
               padding: EdgeInsets.only(right: 0),
               child: Align(

@@ -263,7 +263,7 @@ void showConfirmationDialog(BuildContext context, dynamic dest) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('你的選擇正確無誤？'),
+        title: Text('你的選擇是否無誤？'),
         actions: [
           Align(
             alignment: Alignment.center,

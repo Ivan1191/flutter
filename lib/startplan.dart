@@ -60,7 +60,7 @@ class _StartPlanState extends State<StartPlan> {
       body: Center(
           child: Column(
         children: [
-          SizedBox(height: 190),
+          SizedBox(height: 180),
           Text(
             '創建行程',
             style: TextStyle(
@@ -173,7 +173,7 @@ class _StartPlanState extends State<StartPlan> {
               ),
             ),
           ),
-          SizedBox(height: 200),
+          SizedBox(height: 210),
           Padding(
             padding: EdgeInsets.only(right: 0),
             child: Align(
