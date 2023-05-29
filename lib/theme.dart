@@ -53,7 +53,11 @@ class _ThemesState extends State<ThemeRoute> {
                   context,
                   MaterialPageRoute(builder: (context) {
                     theme = 1;
-                    return GotoRoute(furtherList: initList);
+                    return GotoRoute(
+                      furtherList: initList,
+                      type: "玩樂",
+                      level: '0',
+                    );
                   }), // 替換為要跳轉的頁面
                 );
               },
@@ -68,7 +72,11 @@ class _ThemesState extends State<ThemeRoute> {
                   context,
                   MaterialPageRoute(builder: (context) {
                     theme = 2;
-                    return GotoRoute(furtherList: initList);
+                    return GotoRoute(
+                      furtherList: initList,
+                      type: "吃飯",
+                      level: '0',
+                    );
                   }),
                 );
               },

@@ -6,9 +6,14 @@ import 'package:fianl/food.dart';
 
 class GotoRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
+  final String type;
+  final String level;
+
   GotoRoute({
     super.key,
     required this.furtherList,
+    required this.type,
+    required this.level,
   });
 
   @override
@@ -70,7 +75,9 @@ class _GotoState extends State<GotoRoute> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => VoiceRoute(
-                          furtherList: widget.furtherList)), // 替換為要跳轉的頁面
+                          furtherList: widget.furtherList,
+                          type: widget.type,
+                          level: widget.level)), // 替換為要跳轉的頁面
                 );
               },
               child: Center(
@@ -85,7 +92,8 @@ class _GotoState extends State<GotoRoute> {
                   MaterialPageRoute(
                       builder: (context) => (theme == 1)
                           ? DestRoute(furtherList: widget.furtherList)
-                          : FoodRoute()), // 替換為要跳轉的頁面
+                          : FoodRoute(
+                              furtherList: widget.furtherList)), // 替換為要跳轉的頁面
                 );
               },
               child: Center(

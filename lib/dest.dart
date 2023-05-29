@@ -35,34 +35,34 @@ class FurtherKeyword {
 List<DestinationKeyword> ideaList(BuildContext context) {
   return [
     DestinationKeyword(
-      assetName: 'images/p1.jpg',
-      title: '遊樂場',
-      furtherList: zooList,
-    ),
-    DestinationKeyword(
-      assetName: 'images/p2.jpg',
+      assetName: 'images/p1.png',
       title: '動物園',
       furtherList: zooList,
     ),
     DestinationKeyword(
+      assetName: 'images/p2.jpg',
+      title: '遊樂場',
+      furtherList: playgroundList,
+    ),
+    DestinationKeyword(
       assetName: 'images/p3.jpg',
       title: '海洋館',
-      furtherList: zooList,
+      furtherList: aquariumList,
     ),
     DestinationKeyword(
       assetName: 'images/p7.jpg',
       title: '博物館',
-      furtherList: zooList,
+      furtherList: museumList,
     ),
     DestinationKeyword(
       assetName: 'images/p8.jpg',
       title: '美術館',
-      furtherList: zooList,
+      furtherList: artList,
     ),
     DestinationKeyword(
       assetName: 'images/p9.jpg',
       title: '歷史古蹟',
-      furtherList: zooList,
+      furtherList: landmarkList,
     ),
   ];
 }
@@ -75,43 +75,171 @@ List<FurtherKeyword> zooList(BuildContext context) {
     ),
     FurtherKeyword(
       assetName: 'images/p5.jpg',
-      title: '熊貓',
+      title: '孔雀',
     ),
     FurtherKeyword(
       assetName: 'images/p6.jpg',
-      title: '企鵝',
+      title: '狐蒙',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p10.jpg',
+      title: '大嘴鳥',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p11.jpg',
+      title: '梅花鹿',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p12.jpg',
+      title: '大象',
     ),
   ];
 }
 
-// List<DestinationKeyword> destinations(BuildContext context) {
-//   return [
-//     DestinationKeyword(
-//       assetName: 'images/pic1.jpg',
-//       title: '金砂里步道',
-//       description: '溫暖的花季',
-//       location: '台灣',
-//     ),
-//     DestinationKeyword(
-//       assetName: 'images/pic2.jpg',
-//       title: '井仔腳鹽田',
-//       description: '慢生活步調',
-//       location: '台灣',
-//     ),
-//     DestinationKeyword(
-//       assetName: 'images/pic3.jpg',
-//       title: '漁光島沙灘',
-//       description: '金黃色夕陽',
-//       location: '台灣',
-//     ),
-//     DestinationKeyword(
-//       assetName: 'images/pic4.jpg',
-//       title: '台江國家公園',
-//       description: "綠自然景觀",
-//       location: '台灣',
-//     ),
-//   ];
-// }
+List<FurtherKeyword> playgroundList(BuildContext context) {
+  return [
+    FurtherKeyword(
+      assetName: 'images/p13.jpg',
+      title: '雲霄飛車',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p14.jpg',
+      title: '旋轉木馬',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p15.jpg',
+      title: '摩天輪',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p16.jpg',
+      title: '水上滑梯',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p17.jpg',
+      title: '大怒神',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p18.jpg',
+      title: '海盜船',
+    ),
+  ];
+}
+
+List<FurtherKeyword> aquariumList(BuildContext context) {
+  return [
+    FurtherKeyword(
+      assetName: 'images/p19.jpg',
+      title: '海豚',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p20.jpg',
+      title: '企鵝',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p21.jpg',
+      title: '海獅',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p22.jpg',
+      title: '水獺',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p23.jpg',
+      title: '水母',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p24.jpg',
+      title: '海馬',
+    ),
+  ];
+}
+
+List<FurtherKeyword> museumList(BuildContext context) {
+  return [
+    FurtherKeyword(
+      assetName: 'images/p25.jpg',
+      title: '歷史',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p26.jpg',
+      title: '恐龍',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p27.jpg',
+      title: '木乃伊',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p28.jpg',
+      title: '藝術',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p29.jpg',
+      title: '標本',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p30.jpg',
+      title: '畫相',
+    ),
+  ];
+}
+
+List<FurtherKeyword> artList(BuildContext context) {
+  return [
+    FurtherKeyword(
+      assetName: 'images/p31.jpg',
+      title: '雕塑',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p32.jpg',
+      title: '油畫',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p33.jpg',
+      title: '國畫',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p34.jpg',
+      title: '速寫',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p35.jpg',
+      title: '陶瓷',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p36.jpg',
+      title: '攝影',
+    ),
+  ];
+}
+
+List<FurtherKeyword> landmarkList(BuildContext context) {
+  return [
+    FurtherKeyword(
+      assetName: 'images/p37.jpg',
+      title: '廟宇',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p38.jpg',
+      title: '車站',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p39.jpg',
+      title: '教堂',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p40.jpg',
+      title: '燈塔',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p41.jpg',
+      title: '官邸',
+    ),
+    FurtherKeyword(
+      assetName: 'images/p42.jpg',
+      title: '書院',
+    ),
+  ];
+}
 
 FlutterTts flutterTts = FlutterTts();
 
@@ -124,48 +252,51 @@ Future<void> speakText(String text) async {
 void showConfirmationDialog(BuildContext context, dynamic dest) {
   Widget page;
   (ideacnt < 2)
-      ? page = GotoRoute(furtherList: dest.furtherList)
+      ? page = GotoRoute(
+          furtherList: dest.furtherList,
+          type: "玩樂",
+          level: '1',
+        )
       : page = ChooseRoute();
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('你的選擇正確無誤？'),
+        title: Text('你的選擇是否無誤？'),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  print(dest.title.toString());
-
-                  ideacnt++;
-                  destList.add(dest.title.toString());
-                  print(destList);
-                  return page;
-                }),
-              );
-            },
-            child: Text(
-              '確定',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                color: Colors.black,
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 255, 248, 225),
               ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // 取消，返回原本的頁面
-            },
-            child: Text(
-              '取消',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                color: Colors.black,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      print(dest.title.toString());
+
+                      ideacnt++;
+                      destList.add(dest.title.toString());
+                      print(destList);
+                      return page;
+                    }),
+                  );
+                },
+                icon:
+                    Icon(Icons.check, color: Color.fromARGB(255, 254, 130, 8)),
+                iconSize: 30.0,
+                splashRadius: 20.0,
+                padding: EdgeInsets.all(10.0),
+                constraints: BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                ),
               ),
             ),
           ),
