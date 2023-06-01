@@ -218,7 +218,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         return Theme(
           data: ThemeData.light().copyWith(
             primaryColor: Colors.purple, // 設置主題顏色
-            accentColor: Colors.purple, // 設置選中的顏色
+            hintColor: Colors.purple, // 設置選中的顏色
             colorScheme: ColorScheme.light(primary: Colors.purple),
           ),
           child: child ?? SizedBox(),

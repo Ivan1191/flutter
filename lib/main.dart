@@ -9,6 +9,11 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'choice.dart';
+
+List<TravelDestination> resultlst = [];
+
 String address = '';
 // control unit
 int theme = 1;
@@ -21,7 +26,66 @@ void main() {
   runApp(MyApp());
 }
 
-Future callpicture(String name) async {
+Future updateList() async {
+  var tmplist = await postKeyWord("台北", "動物園 大嘴鳥", "-1", '-1', '玩樂', '3');
+  List<dynamic> list = tmplist.item1;
+  for (int i = 0; i < list.length; i++) {
+    var name = await callpicture(list[i]["Name"]);
+    print(name);
+    resultlst.add(TravelDestination(
+        assetName: "assetName",
+        title: list[i]["Name"],
+        description: list[i]["Toldescribe"],
+        city: "city",
+        location: "location"));
+    //   // String name = await callpicture(tmplist[0][i]["Name"]) as String;
+    //   resultlst.add(TravelDestination(
+    //       assetName: "name",
+    //       title: list[i]["Name"],
+    //       description: list[i]["Toldscribe"],
+    //       city: "city",
+    //       location: "location"));
+  }
+}
+
+/* 測試功能用頁面 */
+class Temp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Center(
+        child: FloatingActionButton(
+          child: Text('按鈕'),
+          onPressed: () async {
+            // 在這裡加入按鈕被點擊後的操作
+            // var data = await postKeyWord("台北市", "動物園", "-1", "-1", "吃飯", "2");
+            updateList().then(
+              (value) {},
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+Future<String> callpicture(String name) async {
   // default output[no]["Name"]
   // return the name of that image
   var msg = {'Name': name};
@@ -34,16 +98,21 @@ Future callpicture(String name) async {
       body: jsonEncode(msg),
     );
     if (response.statusCode == 200) {
-      final imageBytes = response.bodyBytes;
-      final directory = await getTemporaryDirectory();
-      final imagePath = '${directory.path}/$name.jpg';
-      File(imagePath).writeAsBytesSync(imageBytes);
+      final bytes = response.bodyBytes;
+      final file =
+          await DefaultCacheManager().putFile('image_cache_key', bytes);
+      final imagePath = file.path;
+      Image.memory(
+        bytes,
+        fit: BoxFit.cover,
+      );
       return imagePath;
     } else {
       return "image/false.jpg";
     }
   } catch (e) {
     print('Error occured: $e');
+    return "image/false.jpg";
   }
 }
 
@@ -77,8 +146,6 @@ dynamic postKeyWord(String location, String keyword, String locationPx,
     // 以下 for 未來 不同type 調整用
     if (level == 1) {
       var output = jsonDecode(respText)["message"];
-      print(output);
-      print(level);
       return Tuple2(output, level);
     }
     if (level == 2) {

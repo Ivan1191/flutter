@@ -22,19 +22,20 @@ class TravelDestination {
 
 List<TravelDestination> result = [];
 
-Future<List<TravelDestination>> placeList() async {
-  var dest = destList.join(' ');
+Future updateList() async {
+  var dest = destList.join(" ");
   var tmplist = await postKeyWord("台北", dest, "-1", '-1', '玩樂', '3');
-  for (int i = 0; i < tmplist[0].length; i++) {
-    String name = await callpicture(tmplist[0][i]["Name"]) as String;
+  List<dynamic> list = tmplist.item1;
+  for (int i = 0; i < list.length; i++) {
+    var name = await callpicture(list[i]["Name"]);
+    print(name);
     result.add(TravelDestination(
         assetName: name,
-        title: tmplist[i]["Name"],
-        description: tmplist[i]["Toldscribe"],
+        title: list[i]["Name"],
+        description: list[i]["Toldescribe"],
         city: "city",
         location: "location"));
   }
-  return result;
 }
 
 List<TravelDestination> destinations(BuildContext context) {
@@ -404,6 +405,13 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
   }
 
   @override
+  void initState() async {
+    super.initState();
+    print(result.length);
+    await updateList();
+  }
+
+  @override
   void dispose() {
     _isSelected.dispose();
     super.dispose();
@@ -439,11 +447,11 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-              itemCount: destinations(context).length,
+              itemCount: result.length,
               separatorBuilder: (context, index) =>
                   SizedBox(height: 0), // 垂直空間間距
               itemBuilder: (context, index) {
-                final destination = destinations(context)[index];
+                final destination = result[index];
                 return Column(
                   children: [
                     SizedBox(
