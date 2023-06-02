@@ -20,17 +20,13 @@ class TravelDestination {
   final String location;
 }
 
-List<TravelDestination> result = [];
-
-Future updateList() async {
+Future<void> updateList() async {
   var dest = destList.join(" ");
   var tmplist = await postKeyWord("台北", dest, "-1", '-1', '玩樂', '3');
   List<dynamic> list = tmplist.item1;
   for (int i = 0; i < list.length; i++) {
-    var name = await callpicture(list[i]["Name"]);
-    print(name);
     result.add(TravelDestination(
-        assetName: name,
+        assetName: list[i]["Image"],
         title: list[i]["Name"],
         description: list[i]["Toldescribe"],
         city: "city",
@@ -214,7 +210,7 @@ class _DetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Image.asset(path),
+                    Image.network(path),
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 10, left: 20, right: 20, bottom: 10),
@@ -405,13 +401,6 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
   }
 
   @override
-  void initState() async {
-    super.initState();
-    print(result.length);
-    await updateList();
-  }
-
-  @override
   void dispose() {
     _isSelected.dispose();
     super.dispose();
@@ -425,6 +414,12 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
         // 使用 SingleChildScrollView 包裹 Column
         child: Column(
           children: [
+            FloatingActionButton(onPressed: () async {
+              await updateList();
+              for (int i = 0; i < result.length; i++) {
+                print(result[i].assetName);
+              }
+            }),
             SizedBox(
               height: 50,
             ),

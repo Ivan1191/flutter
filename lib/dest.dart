@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'main.dart';
+// import 'main.dart';
 import 'goto.dart';
-import 'choice.dart';
+// import 'choice.dart';
+import 'package:fianl/main.dart';
+import 'package:fianl/choice.dart';
 
 enum CardType {
   standard,
@@ -258,7 +260,6 @@ void showConfirmationDialog(BuildContext context, dynamic dest) {
           level: '1',
         )
       : page = ChooseRoute();
-
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -275,6 +276,10 @@ void showConfirmationDialog(BuildContext context, dynamic dest) {
                   ideacnt++;
                   destList.add(dest.title.toString());
                   print(destList);
+                  /* 在串接到最後一頁之前更新 list*/
+                  if (ideacnt >= 2) {
+                    updateList();
+                  }
                   return page;
                 }),
               );

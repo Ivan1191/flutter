@@ -1,4 +1,6 @@
 // ignore_for_file: sort_child_properties_last, unnecessary_new, must_be_immutable
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // 引入日期格式化套件
 import 'start.dart';
@@ -12,8 +14,7 @@ import 'dart:convert';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'choice.dart';
 
-List<TravelDestination> resultlst = [];
-
+List<TravelDestination> result = [];
 String address = '';
 // control unit
 int theme = 1;
@@ -26,27 +27,20 @@ void main() {
   runApp(MyApp());
 }
 
-Future updateList() async {
-  var tmplist = await postKeyWord("台北", "動物園 大嘴鳥", "-1", '-1', '玩樂', '3');
-  List<dynamic> list = tmplist.item1;
-  for (int i = 0; i < list.length; i++) {
-    var name = await callpicture(list[i]["Name"]);
-    print(name);
-    resultlst.add(TravelDestination(
-        assetName: "assetName",
-        title: list[i]["Name"],
-        description: list[i]["Toldescribe"],
-        city: "city",
-        location: "location"));
-    //   // String name = await callpicture(tmplist[0][i]["Name"]) as String;
-    //   resultlst.add(TravelDestination(
-    //       assetName: "name",
-    //       title: list[i]["Name"],
-    //       description: list[i]["Toldscribe"],
-    //       city: "city",
-    //       location: "location"));
-  }
-}
+// Future updateList() async {
+//   var tmplist = await postKeyWord("台北", "動物園 大嘴鳥", "-1", '-1', '玩樂', '3');
+//   List<dynamic> list = tmplist.item1;
+//   for (int i = 0; i < list.length; i++) {
+//     var name = await callpicture(list[i]["Name"]);
+//     print(name);
+//     result.add(TravelDestination(
+//         assetName: "assetName",
+//         title: list[i]["Name"],
+//         description: list[i]["Toldescribe"],
+//         city: "city",
+//         location: "location"));
+//   }
+// }
 
 /* 測試功能用頁面 */
 class Temp extends StatelessWidget {
@@ -62,7 +56,20 @@ class Temp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String imageUrl = "images/1.1.png";
+  var url =
+      "http://mmweb.tw/sys/club_blogpage/img/b_pic_82684_20131105102828.jpg";
+  void updateImage() async {
+    var cont = await postKeyWord("台北市", "動物園 玩樂", "-1", "-1", "玩樂", "3");
+    print(cont.item1[0]["Image"]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,16 +77,24 @@ class HomePage extends StatelessWidget {
         title: Text('Home'),
       ),
       body: Center(
-        child: FloatingActionButton(
-          child: Text('按鈕'),
-          onPressed: () async {
-            // 在這裡加入按鈕被點擊後的操作
-            // var data = await postKeyWord("台北市", "動物園", "-1", "-1", "吃飯", "2");
-            updateList().then(
-              (value) {},
-            );
-          },
-        ),
+        child: Column(children: [
+          new Image.network(
+            url,
+            width: 200,
+            height: 200,
+          ),
+          FloatingActionButton(
+            child: Text('按鈕'),
+            onPressed: () async {
+              // 在這裡加入按鈕被點擊後的操作
+              // var data = await postKeyWord("台北市", "動物園", "-1", "-1", "吃飯", "2");
+              // updateList().then(
+              //   (value) {},
+              // );
+              updateImage();
+            },
+          ),
+        ]),
       ),
     );
   }
@@ -102,17 +117,13 @@ Future<String> callpicture(String name) async {
       final file =
           await DefaultCacheManager().putFile('image_cache_key', bytes);
       final imagePath = file.path;
-      Image.memory(
-        bytes,
-        fit: BoxFit.cover,
-      );
       return imagePath;
     } else {
-      return "image/false.jpg";
+      return "images/false.jpg";
     }
   } catch (e) {
     print('Error occured: $e');
-    return "image/false.jpg";
+    return "images/false.jpg";
   }
 }
 
@@ -289,7 +300,6 @@ class _IndexRouteState extends State<IndexRoute> {
               ),
               style: ElevatedButton.styleFrom(
                 primary: Colors.amber[800],
-                minimumSize: Size(200, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -309,7 +319,6 @@ class _IndexRouteState extends State<IndexRoute> {
               ),
               style: ElevatedButton.styleFrom(
                 primary: Colors.amber[800],
-                minimumSize: Size(200, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
