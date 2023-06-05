@@ -126,7 +126,7 @@ class _DetailsCard extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: Ink.image(
-                      image: AssetImage(path),
+                      image: NetworkImage(path),
                       fit: BoxFit.cover,
                       child: Container(),
                     ),
@@ -414,12 +414,6 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
         // 使用 SingleChildScrollView 包裹 Column
         child: Column(
           children: [
-            FloatingActionButton(onPressed: () async {
-              await updateList();
-              for (int i = 0; i < result.length; i++) {
-                print(result[i].assetName);
-              }
-            }),
             SizedBox(
               height: 50,
             ),
