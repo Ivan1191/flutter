@@ -1,0 +1,171 @@
+2023.05.26 星期五
+11:24 堃-Joshua Lee 01:51
+2023.06.11 星期日
+23:01 堃-Joshua Lee 07:26
+23:03 Cindy -------------------------------------
+Translated Report (Full Report Below)
+-------------------------------------
+
+Incident Identifier: 439A648C-930C-4702-B870-C3CA15455A59
+CrashReporter Key:   9CAB2E81-6D5B-E159-FBE2-63B29BA83F06
+Hardware Model:      MacBookAir10,1
+Process:             Runner [75632]
+Path:                /Users/USER/Library/Developer/CoreSimulator/Devices/5F6D52E8-4C52-4442-BE2D-6643DF79FAB4/data/Containers/Bundle/Application/8C6F1DDE-63F1-4FB6-B804-87637C3FED14/Runner.app/Runner
+Identifier:          com.example.run
+Version:             0.0.1 (1)
+Code Type:           ARM-64 (Native)
+Role:                Foreground
+Parent Process:      launchd_sim [72349]
+Coalition:           com.apple.CoreSimulator.SimDevice.5F6D52E8-4C52-4442-BE2D-6643DF79FAB4 [11551]
+Responsible Process: SimulatorTrampoline [839]
+
+Date/Time:           2023-06-11 23:02:40.3431 +0800
+Launch Time:         2023-06-11 23:02:32.4633 +0800
+OS Version:          macOS 13.4 (22F66)
+Release Type:        User
+Report Version:      104
+
+Exception Type:  EXC_CRASH (SIGABRT)
+Exception Codes: 0x0000000000000000, 0x0000000000000000
+Termination Reason: TCC 0 
+This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSSpeechRecognitionUsageDescription key with a string value explaining to the user how the app uses this data.
+
+Triggered by Thread:  3
+
+Thread 0::  Dispatch queue: com.apple.main-thread
+0   libsystem_kernel.dylib        	       0x1b17dc190 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	       0x1b17ed258 mach_msg2_internal + 76
+2   libsystem_kernel.dylib        	       0x1b17e4398 mach_msg_overwrite + 540
+3   libsystem_kernel.dylib        	       0x1b17dc500 mach_msg + 20
+4   CoreFoundation                	       0x1039ad4a8 __CFRunLoopServiceMachPort + 156
+5   CoreFoundation                	       0x1039a7ad4 __CFRunLoopRun + 1128
+6   CoreFoundation                	       0x1039a7254 CFRunLoopRunSpecific + 584
+7   GraphicsServices              	       0x10e8ebc9c GSEventRunModal + 160
+8   UIKitCore                     	       0x11c672ff0 -[UIApplication _run] + 868
+9   UIKitCore                     	       0x11c676f3c UIApplicationMain + 124
+10  Runner                        	       0x102147f40 main + 64 (AppDelegate.swift:5)
+11  dyld_sim                      	       0x102329514 start_sim + 20
+12  dyld                          	       0x1024c5f28 start + 2236
+
+Thread 1:
+0   libsystem_pthread.dylib       	       0x1b1833634 start_wqthread + 0
+
+Thread 2:: com.apple.uikit.eventfetch-thread
+0   libsystem_kernel.dylib        	       0x1b17dc190 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	       0x1b17ed258 mach_msg2_internal + 76
+2   libsystem_kernel.dylib        	       0x1b17e4398 mach_msg_overwrite + 540
+3   libsystem_kernel.dylib        	       0x1b17dc500 mach_msg + 20
+4   CoreFoundation                	       0x1039ad4a8 __CFRunLoopServiceMachPort + 156
+5   CoreFoundation                	       0x1039a7ad4 __CFRunLoopRun + 1128
+6   CoreFoundation                	       0x1039a7254 CFRunLoopRunSpecific + 584
+7   Foundation                    	       0x105ee74bc -[NSRunLoop(NSRunLoop) runMode:beforeDate:] + 208
+8   Foundation                    	       0x105ee76e0 -[NSRunLoop(NSRunLoop) runUntilDate:] + 60
+9   UIKitCore                     	       0x11c712714 -[UIEventFetcher threadMain] + 404
+10  Foundation                    	       0x105f0cde0 __NSThread__start__ + 704
+11  libsystem_pthread.dylib       	       0x1b1838428 _pthread_start + 116
+12  libsystem_pthread.dylib       	       0x1b1833648 thread_start + 8
+
+Thread 3 Crashed::  Dispatch queue: com.apple.root.default-qos
+0   libsystem_kernel.dylib        	       0x1b17e8310 __abort_with_payload + 8
+1   libsystem_kernel.dylib        	       0x1b180bd94 abort_with_payload_wrapper_internal + 100
+2   libsystem_kernel.dylib        	       0x1b180bdc4 abort_with_payload + 12
+3   TCC                           	       0x1162ab13c __TCC_CRASHING_DUE_TO_PRIVACY_VIOLATION__ + 168
+4   TCC                           	       0x1162abac0 __TCCAccessRequest_block_invoke_7 + 532
+5   TCC                           	       0x1162afd98 __tccd_send_message_block_invoke + 612
+6   libxpc.dylib                  	       0x1037d662c _xpc_connection_reply_callout + 60
+7   libxpc.dylib                  	       0x1037ca610 _xpc_connection_call_reply_async + 76
+8   libdispatch.dylib             	       0x10337f780 _dispatch_client_callout3 + 16
+9   libdispatch.dylib             	       0x10339fa94 _dispatch_mach_msg_async_reply_invoke + 520
+10  libdispatch.dylib             	       0x103393cb0 _dispatch_kevent_worker_thread + 1584
+11  libsystem_pthread.dylib       	       0x1b18348b0 _pthread_wqthread + 340
+12  libsystem_pthread.dylib       	       0x1b183363c start_wqthread + 8
+
+Thread 4:: io.flutter.1.ui
+0   ???                           	       0x14526a8b0 ???
+1   ???                           	       0x14526a2f0 ???
+2   ???                           	       0x145269870 ???
+3   ???                           	       0x1452678f4 ???
+4   ???                           	       0x145242e94 ???
+5   ???                           	       0x145240d10 ???
+6   ???                           	       0x14525d008 ???
+7   ???                           	       0x145242e94 ???
+8   ???                           	       0x145240d10 ???
+9   ???                           	       0x145250518 ???
+10  ???                           	       0x145242e94 ???
+11  ???                           	       0x145240d10 ???
+12  ???                           	       0x1452440b4 ???
+13  ???                           	       0x145242e94 ???
+14  ???                           	       0x145240d10 ???
+15  ???                           	       0x1452440b4 ???
+16  ???                           	       0x145242e94 ???
+17  ???                           	       0x145240d10 ???
+18  ???                           	       0x14525d008 ???
+19  ???                           	       0x145242e94 ???
+20  ???                           	       0x145240d10 ???
+21  ???                           	       0x14a085090 ???
+22  ???                           	       0x145242e94 ???
+23  ???                           	       0x145240d10 ???
+24  ???                           	       0x1452440b4 ???
+25  ???                           	       0x145242e94 ???
+26  ???                           	       0x145240d10 ???
+27  ???                           	       0x1452440b4 ???
+28  ???                           	       0x145242e94 ???
+29  ???                           	       0x145240d10 ???
+30  ???                           	       0x1452440b4 ???
+31  ???                           	       0x145242e94 ???
+32  ???                           	       0x145240d10 ???
+33  ???                           	       0x1452440b4 ???
+34  ???                           	       0x145242e94 ???
+35  ???                           	       0x145240d10 ???
+36  ???                           	       0x1452440b4 ???
+37  ???                           	       0x145242e94 ???
+38  ???                           	       0x145240d10 ???
+39  ???                           	       0x1452440b4 ???
+40  ???                           	       0x14a084b4c ???
+41  ???                           	       0x145242e94 ???
+42  ???                           	       0x145240d10 ???
+43  ???                           	       0x1452440b4 ???
+44  ???                           	       0x14525633c ???
+45  ???                           	       0x145242e94 ???
+46  ???                           	       0x145240d10 ???
+47  ???                           	       0x145250518 ???
+48  ???                           	       0x145242e94 ???
+49  ???                           	       0x145240d10 ???
+50  ???                           	       0x145256164 ???
+51  ???                           	       0x14525608c ???
+52  ???                           	       0x14b226e3c ???
+53  ???                           	       0x14b226888 ???
+54  ???                           	       0x145242e94 ???
+55  ???                           	       0x145240d10 ???
+56  ???                           	       0x1452440b4 ???
+57  ???                           	       0x145242e94 ???
+58  ???                           	       0x145240d10 ???
+59  ???                           	       0x1452440b4 ???
+60  ???                           	       0x145253b24 ???
+61  ???                           	       0x145242e94 ???
+62  ???                           	       0x145240d10 ???
+63  ???                           	       0x145250518 ???
+64  ???                           	       0x145242e94 ???
+65  ???                           	       0x145240d10 ???
+66  ???                           	       0x1452440b4 ???
+67  ???                           	       0x145242e94 ???
+68  ???                           	       0x145240d10 ???
+69  ???                           	       0x145250518 ???
+70  ???                           	       0x145242e94 ???
+71  ???                           	       0x145240d10 ???
+72  ???                           	       0x1452440b4 ???
+73  ???                           	       0x145242e94 ???
+74  ???                           	       0x145240d10 ???
+75  ???                           	       0x1452440b4 ???
+76  ???                           	       0x145242e94 ???
+77  ???                           	       0x145240d10 ???
+78  ???                           	       0x145256164 ???
+79  ???                           	       0x14525608c ???
+80  ???                           	       0x1452651c0 ???
+81  ???                           	       0x14525de60 ???
+82  ???                           	       0x145242e94 ???
+83  ???                           	       0x145240d10 ???
+84  ???                           	       0x14525d008 ???
+85  ???                           	       0x145242e94 ???
+86  ???                           	       0x145240d10 ???
+87  ???                           	       0x14525c31
