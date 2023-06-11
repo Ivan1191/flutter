@@ -385,6 +385,7 @@ class _TappableTravelDestinationItemState
   }
 }
 
+// ignore: must_be_immutable
 class DestRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
   DestRoute({
@@ -427,24 +428,42 @@ class _DestRouteState extends State<DestRoute> with RestorationMixin {
           SizedBox(
             height: 145,
           ),
-          Text(
-            '選擇以下分類!',
-            style: TextStyle(
-              fontFamily: 'Arial',
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w700,
-              fontSize: 36,
-              height: 1.13,
-              color: Color.fromRGBO(254, 130, 8, 1),
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 0, left: 75),
+                child: Text(
+                  '選擇以下分類!',
+                  style: TextStyle(
+                    fontFamily: 'Arial',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    height: 1.13,
+                    color: Color.fromRGBO(254, 130, 8, 1),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  onPressed: () {
+                    speakText('選擇以下分類');
+                  },
+                  icon: Icon(Icons.volume_up_rounded),
+                  color: Color.fromARGB(255, 254, 130, 8),
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 20,
           ),
           GridView.count(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
               crossAxisCount: 2,
-              childAspectRatio: 0.85,
+              childAspectRatio: 0.75,
               mainAxisSpacing: 0,
               controller: ScrollController(keepScrollOffset: false),
               shrinkWrap: true,
@@ -507,7 +526,7 @@ class _DestRouteState extends State<DestRoute> with RestorationMixin {
                   // width: 50.0,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 5, bottom: 50, left: 17, right: 17),
+                        top: 5, bottom: 77, left: 17, right: 17),
                     child: FloatingActionButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(36),

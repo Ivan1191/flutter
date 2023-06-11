@@ -365,6 +365,7 @@ class _TappableTravelFoodItemState extends State<TappableTravelFoodItem> {
   }
 }
 
+// ignore: must_be_immutable
 class FoodRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
   FoodRoute({

@@ -246,7 +246,7 @@ class _DetailsPage extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 254, 130, 8),
+                              backgroundColor: Color.fromARGB(255, 254, 130, 8),
                               minimumSize: Size(120, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100),
@@ -268,7 +268,8 @@ class _DetailsPage extends StatelessWidget {
                               Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 255, 248, 225),
+                              backgroundColor:
+                                  Color.fromARGB(255, 255, 248, 225),
                               minimumSize: Size(120, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100),
@@ -415,18 +416,36 @@ class _ChooseState extends State<ChooseRoute> with RestorationMixin {
         child: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 80,
             ),
-            Text(
-              '我想要去:',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w700,
-                fontSize: 36,
-                height: 1.13,
-                color: Color.fromRGBO(254, 130, 8, 1),
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 0, left: 120),
+                  child: Text(
+                    '我想要去',
+                    style: TextStyle(
+                      fontFamily: 'Arial',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 36,
+                      height: 1.13,
+                      color: Color.fromRGBO(254, 130, 8, 1),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 75),
+                  child: IconButton(
+                    onPressed: () {
+                      speakText('我想要去');
+                    },
+                    icon: Icon(Icons.volume_up_rounded),
+                    color: Color.fromARGB(255, 254, 130, 8),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 20,

@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 
 // import 'adultend.dart';
-import 'kidaccount.dart';
 import 'kidsinfo.dart';
 // import 'place.dart';
-import './main.dart';
 
 class FourDigitValidator {
   static String? validate(String? value) {
@@ -29,13 +24,12 @@ class FourDigitValidator {
 
 class AdultStart extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _AdultStartState createState() => _AdultStartState();
 }
 
 class _AdultStartState extends State<AdultStart> {
   final _formKey = GlobalKey<FormState>();
-  String? _inputValue;
-  TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,34 +70,38 @@ class _AdultStartState extends State<AdultStart> {
                         border: InputBorder.none,
                       ),
                       validator: FourDigitValidator.validate,
-                      onSaved: (String? value) {
-                        _inputValue = value;
-                      },
+                      onSaved: (String? value) {},
                     ),
-                    SizedBox(height: 300),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          // 导航到下一个页面
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => KidsInfo()),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 254, 130, 8),
-                        onPrimary: Colors.white,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 80, bottom: 10, left: 17, right: 17),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              // 导航到下一个页面
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => KidsInfo()),
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 254, 130, 8),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                          child: Text(
+                            '開始規畫',
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        '開始規畫',
-                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ],

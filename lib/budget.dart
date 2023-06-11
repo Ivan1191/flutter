@@ -3,12 +3,11 @@ import 'adultend.dart';
 
 class BudgetPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _BudgetPageState createState() => _BudgetPageState();
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  TextEditingController _textEditingController = TextEditingController();
-  int _selectedIndex = 0;
   String? _minBudget; // 加上問號，表示該變數可以為 null
   String? _maxBudget; // 加上問號，表示該變數可以為 null
 
@@ -22,7 +21,6 @@ class _BudgetPageState extends State<BudgetPage> {
 
   @override
   Widget build(BuildContext context) {
-    var b = 8;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 204, 128),
       body: Center(
@@ -43,7 +41,7 @@ class _BudgetPageState extends State<BudgetPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 200, // 设置一个有限高度
                     child: Row(
                       children: [

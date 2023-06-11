@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 
 class AdultEnd extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _AdultEndState createState() => _AdultEndState();
 }
 
 class _AdultEndState extends State<AdultEnd> {
-  bool _isFromHome = false; // 是否從家中出發
-  bool _isOtherFrom = false; // 是否從其他出發地出發
-  int _selectedIndex = 0;
-  TextEditingController _textEditingController = TextEditingController();
+// 是否從家中出發
+// 是否從其他出發地出發
 
   @override
   Widget build(BuildContext context) {
-    var b = 8;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 204, 128),
       body: Center(
@@ -53,7 +51,7 @@ class _AdultEndState extends State<AdultEnd> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 255, 248, 225),
+                backgroundColor: Color.fromARGB(255, 255, 248, 225),
                 minimumSize: Size(150, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),

@@ -3,17 +3,16 @@ import 'budget.dart';
 
 class PlacePage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _PlacePageState createState() => _PlacePageState();
 }
 
 class _PlacePageState extends State<PlacePage> {
-  TextEditingController _textEditingController = TextEditingController();
 
   List<bool> isSelectedList = [false, false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
-    var b = 8;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 204, 128),
       body: Center(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // 引入flutter_tts庫
+// 引入flutter_tts庫
 import 'package:intl/intl.dart'; // 引入日期格式化套件
 import './main.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _RegistrationPageState createState() => _RegistrationPageState();
 }
 
@@ -16,16 +17,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
 
   // 定義各個表單欄位的初始值
-  String _firstName = '';
-  String _lastName = '';
   String _gender = '男';
   DateTime? _birthday;
-  String _email = '';
-  int _numChildren = 0;
   RangeValues _ageRangeValues = RangeValues(0, 10); // 新增年齡範圍變數
-  String _ageRange = '0-3歲';
-  String _password = '';
-  String _confirmPassword = '';
 
   // 函數：顯示選擇日期的對話框
   Future<void> _selectDate(BuildContext context) async {
@@ -67,7 +61,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   return '';
                 },
                 onSaved: (value) {
-                  _firstName = value!;
                 },
               ),
               // 名字
@@ -82,7 +75,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  _lastName = value!;
                 },
               ),
               // 性別
@@ -191,13 +183,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       MaterialPageRoute(builder: (context) => IndexRoute()),
                     );
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  ),
                   child: Text(
                     '完成',
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   ),
                 ),
               ),

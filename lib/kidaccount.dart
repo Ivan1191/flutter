@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // 引入flutter_tts庫
-import 'package:intl/intl.dart'; // 引入日期格式化套件
-import 'kidsinfo.dart';
+// 引入flutter_tts庫
+// 引入日期格式化套件
 import 'startplan.dart';
-import './main.dart';
 
 class KidAccount extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _KidAccountState createState() => _KidAccountState();
 }
 
 class _KidAccountState extends State<KidAccount> {
-  TextEditingController _textEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    var b = 8;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 204, 128),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 190),
-            Text(
-              '你的小孩',
-              style: TextStyle(
-                color: Color.fromARGB(255, 254, 130, 8),
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
+            SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 200),
+                child: Text(
+                  '你的小孩',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 254, 130, 8),
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 75),
-            Image.asset(
-              'images/kidinfo.png',
-              width: 120,
-              height: 120,
+            SizedBox(
+              child: Padding(
+                padding: EdgeInsets.only(top: 30),
+                child: Image.asset(
+                  'images/kidinfo.png',
+                  width: 120,
+                  height: 120,
+                ),
+              ),
             ),
             SizedBox(height: 30),
             Container(

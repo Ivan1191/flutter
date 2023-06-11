@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:fianl/dest.dart';
-import 'package:fianl/food.dart';
+import 'dest.dart';
+import 'food.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:fianl/main.dart';
+import 'main.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:tuple/tuple.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
+// ignore: must_be_immutable
 class VoiceRoute extends StatefulWidget {
   List<FurtherKeyword> Function(BuildContext) furtherList;
   String type;
@@ -21,6 +19,7 @@ class VoiceRoute extends StatefulWidget {
       required this.level});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VoiceState createState() => _VoiceState();
 }
 
@@ -29,7 +28,7 @@ class _VoiceState extends State<VoiceRoute> {
       LongPressGestureRecognizer();
   late stt.SpeechToText _speechToText; // 語音辨識實例
   String _spokenText = ''; // 儲存辨識結果的文字
-  bool _isButtonPressed = false; // 按鈕狀態
+// 按鈕狀態
 
   @override
   void initState() {
@@ -37,14 +36,29 @@ class _VoiceState extends State<VoiceRoute> {
     _initializeSpeechToText(); // 初始化語音辨識
   }
 
-  void _initializeSpeechToText() {
+  void _initializeSpeechToText() async {
     _speechToText = stt.SpeechToText(); // 建立語音辨識實例
-    _speechToText.initialize(
-      onError: (error) => print('Speech recognition error: $error'), // 設定錯誤回調函數
-      onStatus: (status) =>
-          print('Speech recognition status: $status'), // 設定狀態回調函數
+
+    // 初始化語音辨識
+    bool isAvailable = await _speechToText.initialize(
+      onError: (error) => print('語音辨識錯誤: $error'),
+      onStatus: (status) {
+        print('語音辨識狀態: $status');
+        setState(() {
+          // 檢查語音辨識是否已初始化，並且語音辨識是否可用
+          _isSpeechToTextInitialized =
+              (status == stt.SpeechToText.listeningStatus ||
+                  _speechToText.isAvailable);
+        });
+      },
     );
+
+    if (isAvailable) {
+      _startSpeechToText(); // 開始語音辨識
+    }
   }
+
+  bool _isSpeechToTextInitialized = true;
 
   void showConfirmationDialog(BuildContext context) {
     Widget page;
@@ -59,34 +73,33 @@ class _VoiceState extends State<VoiceRoute> {
           title: Text('語音是否無誤？'),
           content: Text(_spokenText),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return page;
-                  }),
-                );
-              },
-              child: Text(
-                '確定',
-                style: TextStyle(
-                  fontFamily: 'Arial',
-                  fontStyle: FontStyle.normal,
-                  color: Colors.black,
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(255, 255, 248, 225),
                 ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // 取消，返回原本的頁面
-              },
-              child: Text(
-                '取消',
-                style: TextStyle(
-                  fontFamily: 'Arial',
-                  fontStyle: FontStyle.normal,
-                  color: Colors.black,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return page;
+                      }),
+                    );
+                  },
+                  icon: Icon(Icons.check,
+                      color: Color.fromARGB(255, 254, 130, 8)),
+                  iconSize: 30.0,
+                  splashRadius: 20.0,
+                  padding: EdgeInsets.all(10.0),
+                  constraints: BoxConstraints(
+                    minWidth: 0,
+                    minHeight: 0,
+                  ),
                 ),
               ),
             ),
@@ -126,22 +139,21 @@ class _VoiceState extends State<VoiceRoute> {
             SizedBox(height: 40),
             GestureDetector(
               onLongPress: () {
-                // callback();
                 setState(() {
-                  _isButtonPressed = true; // 更新按鈕狀態為按下
+// 更新按鈕狀態為按下
                 });
                 _startSpeechToText(); // 開始語音辨識
               },
               onLongPressUp: () async {
-                // 放開長按後執行
                 setState(() {
-                  _isButtonPressed = false; // 更新按鈕狀態為放開
+// 更新按鈕狀態為放開
                 });
                 _stopSpeechToText();
                 /* 選擇要去哪裡 */
                 var result = await postKeyWord("台北", _spokenText, "-1", "-1",
                     widget.type, '1'); // 這邊 level 要改
                 print(result); /* 這邊 */
+                // ignore: use_build_context_synchronously
                 showConfirmationDialog(context);
               },
               child: SizedBox(
@@ -176,10 +188,20 @@ class _VoiceState extends State<VoiceRoute> {
   }
 
   void _startSpeechToText() {
+    if (!_isSpeechToTextInitialized) {
+      print('語音辨識未初始化');
+      return;
+    }
+
+    if (_speechToText.isListening) {
+      print('語音辨識已經在進行中');
+      return;
+    }
+
     _speechToText.listen(
       onResult: (result) {
         setState(() {
-          _spokenText = result.recognizedWords; // 更新語音辨識結果的文字
+          _spokenText = result.recognizedWords; // 更新辨識到的文字
         });
       },
     );
@@ -198,13 +220,14 @@ class _VoiceState extends State<VoiceRoute> {
     };
     try {
       final response = await http.post(
-        Uri.parse('http://140.116.245.152:22545/HaishingRec'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(msg),
+        Uri.parse('http://140.116.251.174:3000/'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(msg),
       );
-      print(jsonDecode(response.body));
+      print(response.body);
+      setState(() {
+        _spokenText = response.body;
+      });
     } catch (e) {
       print('Error occurred: $e');
     }

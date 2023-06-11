@@ -1,13 +1,10 @@
 // ignore_for_file: sort_child_properties_last, unnecessary_new, must_be_immutable
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // 引入日期格式化套件
 import 'start.dart';
 import 'register.dart';
 import 'package:tuple/tuple.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -199,7 +196,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
   Widget page = IndexRoute();
   // final ScrollController _homeController = ScrollController();
 
@@ -273,7 +269,6 @@ class IndexRoute extends StatefulWidget {
 }
 
 class _IndexRouteState extends State<IndexRoute> {
-  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -299,7 +294,7 @@ class _IndexRouteState extends State<IndexRoute> {
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.amber[800],
+                backgroundColor: Colors.amber[800],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -318,7 +313,7 @@ class _IndexRouteState extends State<IndexRoute> {
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.amber[800],
+                backgroundColor: Colors.amber[800],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -393,8 +388,7 @@ class _FirstPageState extends State<FirstPage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.amber[800],
-                  onPrimary: Colors.white,
+                  foregroundColor: Colors.white, backgroundColor: Colors.amber[800],
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -466,6 +460,7 @@ class _FirstPageState extends State<FirstPage> {
 // 你所在的位置?
 class SecondPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _SecondPageState createState() => _SecondPageState();
 }
 
@@ -530,7 +525,7 @@ class _SecondPageState extends State<SecondPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: _isFromHome ? Colors.amber[800] : Colors.white,
+                    backgroundColor: _isFromHome ? Colors.amber[800] : Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
@@ -552,7 +547,7 @@ class _SecondPageState extends State<SecondPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: _isOtherFrom ? Colors.amber[800] : Colors.white,
+                    backgroundColor: _isOtherFrom ? Colors.amber[800] : Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
@@ -619,7 +614,7 @@ class _SecondPageState extends State<SecondPage> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.amber[800],
+                backgroundColor: Colors.amber[800],
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -755,7 +750,7 @@ class _ThirdPageState extends State<ThirdPage> {
                             TextStyle(fontSize: 20, color: Colors.amber[800]),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // 按鈕底色是白色
+                        backgroundColor: Colors.white, // 按鈕底色是白色
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(
@@ -775,7 +770,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.amber[800],
+                        backgroundColor: Colors.amber[800],
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(
@@ -851,6 +846,7 @@ class _ThirdPageState extends State<ThirdPage> {
 // 你的出遊日期?
 class FourthPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _FourthPageState createState() => _FourthPageState();
 }
 
@@ -949,7 +945,7 @@ class _FourthPageState extends State<FourthPage> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          '${DateFormat('yyyy-MM-dd').format(_selectedDate)}',
+                          DateFormat('yyyy-MM-dd').format(_selectedDate),
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -971,7 +967,7 @@ class _FourthPageState extends State<FourthPage> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          '${DateFormat('yyyy-MM-dd').format(_selectedDate2)}',
+                          DateFormat('yyyy-MM-dd').format(_selectedDate2),
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -1037,7 +1033,7 @@ class _FourthPageState extends State<FourthPage> {
                             TextStyle(fontSize: 20, color: Colors.amber[800]),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // 按鈕底色是白色
+                        backgroundColor: Colors.white, // 按鈕底色是白色
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(
@@ -1057,7 +1053,7 @@ class _FourthPageState extends State<FourthPage> {
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.amber[800],
+                        backgroundColor: Colors.amber[800],
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(
@@ -1133,6 +1129,7 @@ class _FourthPageState extends State<FourthPage> {
 // 你的旅遊預算?
 class FifthPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _FifthPageState createState() => _FifthPageState();
 }
 
@@ -1291,7 +1288,7 @@ class _FifthPageState extends State<FifthPage> {
                               TextStyle(fontSize: 20, color: Colors.amber[800]),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                           shape: RoundedRectangleBorder(
@@ -1312,7 +1309,7 @@ class _FifthPageState extends State<FifthPage> {
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.amber[800],
+                          backgroundColor: Colors.amber[800],
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                           shape: RoundedRectangleBorder(
@@ -1458,7 +1455,7 @@ class _SixthPageState extends State<SixthPage> {
                             TextStyle(fontSize: 20, color: Colors.amber[800]),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // 按鈕底色是白色
+                        backgroundColor: Colors.white, // 按鈕底色是白色
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(
@@ -1480,7 +1477,7 @@ class _SixthPageState extends State<SixthPage> {
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.amber[800],
+                        backgroundColor: Colors.amber[800],
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: RoundedRectangleBorder(

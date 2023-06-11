@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // 引入flutter_tts庫
-import 'package:intl/intl.dart'; // 引入日期格式化套件
+// 引入flutter_tts庫
+// 引入日期格式化套件
 import 'kidsinfo.dart';
-import './main.dart';
 
 class SignupPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _SignupPageState createState() => _SignupPageState();
 }
 
@@ -47,7 +47,7 @@ class _SignupPageState extends State<SignupPage> {
                 // 按钮点击事件处理逻辑
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 255, 248, 225),
+                backgroundColor: Color.fromARGB(255, 255, 248, 225),
                 minimumSize: Size(215, 45),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
@@ -88,7 +88,7 @@ class _SignupPageState extends State<SignupPage> {
                 // 按钮点击事件处理逻辑
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 255, 248, 225),
+                backgroundColor: Color.fromARGB(255, 255, 248, 225),
                 minimumSize: Size(215, 45),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
@@ -129,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                 // 按钮点击事件处理逻辑
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 255, 248, 225),
+                backgroundColor: Color.fromARGB(255, 255, 248, 225),
                 minimumSize: Size(215, 45),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),

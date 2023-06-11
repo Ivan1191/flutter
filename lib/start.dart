@@ -1,8 +1,10 @@
+import 'package:fianl/theme.dart';
 import 'package:flutter/material.dart';
 import 'adultstart.dart';
 
 class StartRoute extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _StartRouteState createState() => _StartRouteState();
 }
 
@@ -52,7 +54,7 @@ class _StartRouteState extends State<StartRoute> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 254, 130, 8),
+                backgroundColor: Color.fromARGB(255, 254, 130, 8),
                 minimumSize: Size(120, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
@@ -67,14 +69,20 @@ class _StartRouteState extends State<StartRoute> {
             ),
             SizedBox(height: 50),
             ElevatedButton(
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThemeRoute()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromARGB(255, 254, 130, 8),
                 minimumSize: Size(120, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
                 ),
-                elevation: 4,
+                shadowColor: Colors.black,
+                elevation: 10,
               ), //回傳到小孩選擇第一頁
               child: Text(
                 '我是小孩',

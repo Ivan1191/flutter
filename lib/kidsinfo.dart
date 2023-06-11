@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // 引入flutter_tts庫
-import 'package:intl/intl.dart'; // 引入日期格式化套件
+// 引入flutter_tts庫
+// 引入日期格式化套件
 import 'kidaccount.dart';
-import './main.dart';
 
 class KidsInfo extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _KidsInfoState createState() => _KidsInfoState();
 }
 
 class _KidsInfoState extends State<KidsInfo> {
   TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _textEditingControllerAge = TextEditingController();
 
   void showConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Color.fromARGB(200, 255, 250, 250),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0), // 设置圆角边框
+          ),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0), // 设置内容内边距
           content: SizedBox(
+            height: 200,
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 14, right: 14),
+                  padding: EdgeInsets.only(top: 14, right: 14, left: 14),
                   child: TextField(
                     controller: _textEditingController,
                     decoration: InputDecoration(
@@ -35,7 +43,8 @@ class _KidsInfoState extends State<KidsInfo> {
                 Padding(
                   padding: EdgeInsets.only(left: 14, right: 14),
                   child: TextField(
-                    controller: _textEditingController,
+                    controller: _textEditingControllerAge,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: '請輸入小孩年齡',
                       filled: true,
@@ -86,13 +95,14 @@ class _KidsInfoState extends State<KidsInfo> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var b = 8;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 204, 128),
       body: Center(
           child: Column(
         children: [
-          SizedBox(height: 190),
+          SizedBox(height: 189),
           Text(
             '創建小孩帳戶',
             style: TextStyle(
@@ -113,7 +123,7 @@ class _KidsInfoState extends State<KidsInfo> {
               showConfirmationDialog(context);
             },
             style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 255, 248, 225),
+              backgroundColor: Color.fromARGB(255, 255, 248, 225),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)), // 设置背景颜色为红色
             ),
