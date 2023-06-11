@@ -366,7 +366,7 @@ class _TappableTravelDestinationItemState
                         children: [
                           Positioned.fill(
                             child: Ink.image(
-                              image: NetworkImage(widget.destination.assetName),
+                              image: AssetImage(widget.destination.assetName),
                               fit: BoxFit.cover,
                               child: Container(),
                             ),

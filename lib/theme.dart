@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fianl/main.dart';
 import 'goto.dart';
 import 'dest.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 // jsut initialization
 List<FurtherKeyword> initList(BuildContext context) {
@@ -27,6 +28,14 @@ class ThemeRoute extends StatefulWidget {
   _ThemesState createState() => _ThemesState();
 }
 
+FlutterTts flutterTts = FlutterTts();
+
+Future<void> speakText(String text) async {
+  await flutterTts.setLanguage('zh-TW');
+  await flutterTts.setSpeechRate(0.5);
+  await flutterTts.speak(text);
+}
+
 class _ThemesState extends State<ThemeRoute> {
   @override
   Widget build(BuildContext context) {
@@ -36,16 +45,35 @@ class _ThemesState extends State<ThemeRoute> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '決定主題吧!',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w700,
-                fontSize: 36,
-                height: 1.13,
-                color: Color.fromRGBO(254, 130, 8, 1),
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 0, left: 90),
+                  child: Text(
+                    '決定主題吧！',
+                    style: TextStyle(
+                      fontFamily: 'Arial',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 36,
+                      height: 1.13,
+                      color: Color.fromRGBO(254, 130, 8, 1),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    onPressed: () {
+                      speakText('決定主題吧！');
+                    },
+                    icon: Icon(Icons.volume_up_rounded),
+                    color: Color.fromARGB(255, 254, 130, 8),
+                    iconSize: 30,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             GestureDetector(

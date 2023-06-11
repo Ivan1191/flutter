@@ -199,6 +199,7 @@ class _VoiceState extends State<VoiceRoute> {
     }
 
     _speechToText.listen(
+      localeId: 'zh_TW', // 繁體中文
       onResult: (result) {
         setState(() {
           _spokenText = result.recognizedWords; // 更新辨識到的文字

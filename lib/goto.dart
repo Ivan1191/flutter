@@ -86,16 +86,35 @@ class _GotoState extends State<GotoRoute> {
                       ),
                     ],
                   )
-                : Text(
-                    '你想去哪裡?',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 36,
-                      height: 1.13,
-                      color: Color.fromRGBO(254, 130, 8, 1),
-                    ),
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 0, left: 75),
+                        child: Text(
+                          '你想去哪裡？',
+                          style: TextStyle(
+                            fontFamily: 'Arial',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 36,
+                            height: 1.13,
+                            color: Color.fromRGBO(254, 130, 8, 1),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 0),
+                        child: IconButton(
+                          onPressed: () {
+                            speakText('你想去哪裡？');
+                          },
+                          icon: Icon(Icons.volume_up_rounded),
+                          color: Color.fromARGB(255, 254, 130, 8),
+                          iconSize: 30,
+                        ),
+                      ),
+                    ],
                   ),
             SizedBox(height: 20),
             GestureDetector(

@@ -1,8 +1,18 @@
+import 'package:fianl/planend.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class JourneyRoute extends StatefulWidget {
   @override
   State<JourneyRoute> createState() => _JourneyState();
+}
+
+FlutterTts flutterTts = FlutterTts();
+
+Future<void> speakText(String text) async {
+  await flutterTts.setLanguage('zh-TW');
+  await flutterTts.setSpeechRate(0.5);
+  await flutterTts.speak(text);
 }
 
 class _JourneyState extends State<JourneyRoute> {
@@ -16,6 +26,10 @@ class _JourneyState extends State<JourneyRoute> {
         actions: [
           IconButton(
             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PlanEnd()),
+              );
               // 處理完成按鈕的點擊事件
             },
             icon: Container(
@@ -23,7 +37,7 @@ class _JourneyState extends State<JourneyRoute> {
                 color: Color.fromRGBO(254, 130, 8, 1),
                 borderRadius: BorderRadius.circular(4),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
               child: Text(
                 '完成',
                 style: TextStyle(
@@ -40,15 +54,37 @@ class _JourneyState extends State<JourneyRoute> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 16),
-          Text(
-            '我的行程:',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(254, 130, 8, 1),
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 0, left: 110),
+                child: Text(
+                  '我的行程',
+                  style: TextStyle(
+                    fontFamily: 'Arial',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    height: 1.13,
+                    color: Color.fromRGBO(254, 130, 8, 1),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  onPressed: () {
+                    speakText('我的行程');
+                  },
+                  icon: Icon(Icons.volume_up_rounded),
+                  color: Color.fromARGB(255, 254, 130, 8),
+                  iconSize: 30,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 30),
           Center(
             child: Column(
               children: [
@@ -56,11 +92,14 @@ class _JourneyState extends State<JourneyRoute> {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.asset(
-                      'images/pic1.jpg',
-                      width: 250,
-                      height: 250,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40.0), // 设置圆角的半径
+                      child: Image.asset(
+                        'images/pic1.jpg',
+                        width: 250,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Text(
                       '賞櫻',
@@ -84,11 +123,14 @@ class _JourneyState extends State<JourneyRoute> {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.asset(
-                      'images/pic2.jpg',
-                      width: 250,
-                      height: 250,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40.0),
+                      child: Image.asset(
+                        'images/pic2.jpg',
+                        width: 250,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Text(
                       '鹽田',
@@ -113,19 +155,19 @@ class _JourneyState extends State<JourneyRoute> {
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: Color.fromARGB(255, 254, 130, 8),
                       border: Border.all(
                         color: Color.fromRGBO(254, 130, 8, 1),
                         width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(100),
                     ),
                     child: Align(
                       alignment: Alignment.center,
                       child: Icon(
                         Icons.add,
-                        size: 48,
-                        color: Color.fromRGBO(254, 130, 8, 1),
+                        size: 40,
+                        color: Colors.white,
                       ),
                     ),
                   ),
