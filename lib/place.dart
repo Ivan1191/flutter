@@ -8,7 +8,6 @@ class PlacePage extends StatefulWidget {
 }
 
 class _PlacePageState extends State<PlacePage> {
-
   List<bool> isSelectedList = [false, false, false, false, false, false];
 
   @override
@@ -89,7 +88,7 @@ class _PlacePageState extends State<PlacePage> {
                 ),
               ],
             ),
-            SizedBox(height: 170),
+            SizedBox(height: 100),
             Padding(
               padding: EdgeInsets.only(right: 0),
               child: Align(
