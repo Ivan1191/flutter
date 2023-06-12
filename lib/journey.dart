@@ -1,4 +1,5 @@
 import 'package:fianl/planend.dart';
+import 'package:fianl/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -150,24 +151,29 @@ class _JourneyState extends State<JourneyRoute> {
                   ],
                 ),
                 SizedBox(height: 16),
-                Center(
+                Align(
+                  alignment: Alignment.center,
                   child: Container(
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                       color: Color.fromARGB(255, 254, 130, 8),
-                      border: Border.all(
-                        color: Color.fromRGBO(254, 130, 8, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(100),
                     ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.add,
-                        size: 40,
-                        color: Colors.white,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ThemeRoute()),
+                        );
+                      },
+                      icon: Icon(Icons.add, color: Colors.white),
+                      iconSize: 30.0,
+                      splashRadius: 20.0,
+                      padding: EdgeInsets.all(10.0),
+                      constraints: BoxConstraints(
+                        minWidth: 0,
+                        minHeight: 0,
                       ),
                     ),
                   ),
